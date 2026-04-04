@@ -1,47 +1,167 @@
+/* src/styles/globals.css */
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
 
+@custom-variant dark (&:is(.dark *));
+
+/* ── Tailwind v4: маппинг CSS-переменных → утилити-классы ── */
+@theme inline {
+    --font-sans:    'Geist Variable', sans-serif;
+    --font-display: 'Cinzel Decorative', serif;
+    --font-cinzel:  'Cinzel', serif;
+    --font-heading: var(--font-sans);
+
+    --color-background:         var(--background);
+    --color-foreground:         var(--foreground);
+    --color-card:               var(--card);
+    --color-card-foreground:    var(--card-foreground);
+    --color-popover:            var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary:            var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary:          var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted:              var(--muted);
+    --color-muted-foreground:   var(--muted-foreground);
+    --color-accent:             var(--accent);
+    --color-accent-foreground:  var(--accent-foreground);
+    --color-destructive:        var(--destructive);
+    --color-border:             var(--border);
+    --color-input:              var(--input);
+    --color-ring:               var(--ring);
+    --color-chart-1:            var(--chart-1);
+    --color-chart-2:            var(--chart-2);
+    --color-chart-3:            var(--chart-3);
+    --color-chart-4:            var(--chart-4);
+    --color-chart-5:            var(--chart-5);
+    --color-sidebar:            var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary:    var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent:     var(--sidebar-accent);
+    --color-sidebar-accent-foreground:  var(--sidebar-accent-foreground);
+    --color-sidebar-border:     var(--sidebar-border);
+    --color-sidebar-ring:       var(--sidebar-ring);
+    --color-auth-bg:            var(--auth-bg-from);
+    --color-brand:              #11806a;
+    --color-brand-hover:        #14967c;
+
+    --radius-sm:  calc(var(--radius) * 0.6);
+    --radius-md:  calc(var(--radius) * 0.8);
+    --radius-lg:  var(--radius);
+    --radius-xl:  calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+/* ── Наша палитра (заменяет серый дефолт shadcn) ─────────── */
 @layer base {
     :root {
-        /* Акцентный цвет проекта */
-        --accent: 160 73% 29%;          /* #11806a в HSL */
-        --accent-foreground: 0 0% 100%;
+        --background:            0 0% 100%;
+        --foreground:            222 47% 11%;
+        --card:                  0 0% 100%;
+        --card-foreground:       222 47% 11%;
+        --popover:               0 0% 100%;
+        --popover-foreground:    222 47% 11%;
+        --primary:               160 73% 29%;
+        --primary-foreground:    0 0% 100%;
+        --secondary:             210 40% 96%;
+        --secondary-foreground:  222 47% 11%;
+        --muted:                 210 40% 96%;
+        --muted-foreground:      215 16% 47%;
+        --accent:                160 73% 29%;
+        --accent-foreground:     0 0% 100%;
+        --destructive:           0 84% 60%;
+        --border:                214 32% 91%;
+        --input:                 214 32% 91%;
+        --ring:                  160 73% 29%;
+        --radius:                0.5rem;
 
-        /* shadcn-совместимые переменные */
-        --background: 0 0% 100%;
-        --foreground: 222 47% 11%;
-        --card: 0 0% 100%;
-        --card-foreground: 222 47% 11%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 222 47% 11%;
-        --primary: 160 73% 29%;
-        --primary-foreground: 0 0% 100%;
-        --secondary: 210 40% 96%;
-        --secondary-foreground: 222 47% 11%;
-        --muted: 210 40% 96%;
-        --muted-foreground: 215 16% 47%;
-        --border: 214 32% 91%;
-        --input: 214 32% 91%;
-        --ring: 160 73% 29%;
-        --radius: 0.5rem;
+        /* chart — нейтральные, заменишь когда дойдём до графиков */
+        --chart-1: 160 73% 29%;
+        --chart-2: 160 60% 45%;
+        --chart-3: 160 45% 55%;
+        --chart-4: 160 35% 65%;
+        --chart-5: 160 25% 75%;
+
+        /* sidebar */
+        --sidebar:                   0 0% 98%;
+        --sidebar-foreground:        222 47% 11%;
+        --sidebar-primary:           160 73% 29%;
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent:            210 40% 96%;
+        --sidebar-accent-foreground: 222 47% 11%;
+        --sidebar-border:            214 32% 91%;
+        --sidebar-ring:              160 73% 29%;
+
+        /* auth layout */
+        --auth-bg-from:       #0d1117;
+        --auth-bg-to:         #111827;
+        --auth-glow:          rgba(17, 128, 106, 0.18);
+        --auth-card-bg:       rgba(255, 255, 255, 0.04);
+        --auth-card-border:   rgba(17, 128, 106, 0.25);
+        --auth-input-bg:      rgba(255, 255, 255, 0.06);
+        --auth-input-border:  rgba(255, 255, 255, 0.10);
+        --auth-input-focus:   rgba(17, 128, 106, 0.55);
+        --auth-glow-secondary: rgba(17, 128, 106, 0.07);
+
+        /* layout */
+        --nav-bg:           rgba(13, 17, 23, 0.8);
+        --footer-bg:        rgba(13, 17, 23, 0.6);
+        --nav-border:       rgba(17, 128, 106, 0.15);
+        --footer-border:    rgba(17, 128, 106, 0.12);
     }
 
     .dark {
-        --background: 222 47% 6%;
-        --foreground: 210 40% 98%;
-        --card: 222 47% 8%;
-        --card-foreground: 210 40% 98%;
-        --popover: 222 47% 8%;
-        --popover-foreground: 210 40% 98%;
-        --primary: 160 73% 40%;         /* светлее в dark mode */
-        --primary-foreground: 0 0% 100%;
-        --secondary: 217 33% 17%;
-        --secondary-foreground: 210 40% 98%;
-        --muted: 217 33% 17%;
-        --muted-foreground: 215 20% 65%;
-        --border: 217 33% 17%;
-        --input: 217 33% 17%;
-        --ring: 160 73% 40%;
-        --accent: 160 73% 40%;
-        --accent-foreground: 0 0% 100%;
+        --background:            222 47% 6%;
+        --foreground:            210 40% 98%;
+        --card:                  222 47% 8%;
+        --card-foreground:       210 40% 98%;
+        --popover:               222 47% 8%;
+        --popover-foreground:    210 40% 98%;
+        --primary:               160 73% 40%;
+        --primary-foreground:    0 0% 100%;
+        --secondary:             217 33% 17%;
+        --secondary-foreground:  210 40% 98%;
+        --muted:                 217 33% 17%;
+        --muted-foreground:      215 20% 65%;
+        --accent:                160 73% 40%;
+        --accent-foreground:     0 0% 100%;
+        --destructive:           0 72% 51%;
+        --border:                217 33% 17%;
+        --input:                 217 33% 17%;
+        --ring:                  160 73% 40%;
+
+        --chart-1: 160 73% 40%;
+        --chart-2: 160 60% 50%;
+        --chart-3: 160 45% 60%;
+        --chart-4: 160 35% 70%;
+        --chart-5: 160 25% 78%;
+
+        --sidebar:                   222 47% 8%;
+        --sidebar-foreground:        210 40% 98%;
+        --sidebar-primary:           160 73% 40%;
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent:            217 33% 17%;
+        --sidebar-accent-foreground: 210 40% 98%;
+        --sidebar-border:            217 33% 17%;
+        --sidebar-ring:              160 73% 40%;
     }
+
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+    html {
+        @apply font-sans;
+    }
+}
+
+/* ── Утилити-класс для hex-паттерна на auth фоне ─────────── */
+.bg-hex-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='52' viewBox='0 0 60 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 2 L58 17 L58 35 L30 50 L2 35 L2 17 Z' fill='none' stroke='%2311806a' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 60px 52px;
 }

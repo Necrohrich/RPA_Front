@@ -21,10 +21,7 @@ const authApi = {
             }).then(r => r.data),
 
     register: (data: RegisterPayload) =>
-        apiClient.post<AuthResponse>('/auth/register', {
-            ...data,
-            device_info: navigator.userAgent,
-        }).then(r => r.data),
+        apiClient.post<AuthResponse>('/auth/register', data).then(r => r.data),
 
     logout: () =>
         apiClient.post('/auth/logout', {
@@ -44,7 +41,10 @@ export const useAuth = () => {
     // Текущий пользователь — загружается если есть токен
     const {data: user, isLoading} = useQuery({
         queryKey: ['user'],
-        queryFn: authApi.me,
+        queryFn: async () => {
+            await new Promise(r => setTimeout(r, 2000))
+            return authApi.me()
+        },
         // не делаем запрос если токена нет — незачем получать 401
         enabled: !!tokenStorage.getAccess(),
         retry: false,
@@ -56,7 +56,7 @@ export const useAuth = () => {
             tokenStorage.set(data.access_token, data.refresh_token)
             // инвалидируем кэш user — useQuery['user'] перезапросит /users/me
             await queryClient.invalidateQueries({ queryKey: ['user'] })
-            navigate('/')
+            navigate('/dashboard')
         },
     })
 
@@ -65,7 +65,7 @@ export const useAuth = () => {
         onSuccess: async (data) => {
             tokenStorage.set(data.access_token, data.refresh_token)
             await queryClient.invalidateQueries({ queryKey: ['user'] })
-            navigate('/')
+            navigate('/dashboard')
         },
     })
 

@@ -27,6 +27,10 @@ const processQueue = (error: unknown, token: string | null) => {
 }
 
 export const refreshTokens = (): Promise<void> => {
+    if (!tokenStorage.getRefresh()) {
+        return Promise.reject(new Error('No refresh token'))
+    }
+
     // Если refresh уже идёт — встаём в очередь вместо нового запроса
     if (isRefreshing) {
         return new Promise<void>((resolve, reject) => {

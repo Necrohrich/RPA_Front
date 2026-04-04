@@ -15,7 +15,7 @@ export function PrivateRoute() {
 export function PublicRoute() {
     const { isAuthenticated, isLoading } = useAuth()
 
-    if (isLoading) return <DiceLoader />
+    if (isLoading) return <DiceLoader fullscreen/>
 
     return !isAuthenticated ? <Outlet /> : <Navigate to="/dashboard" replace />
 }

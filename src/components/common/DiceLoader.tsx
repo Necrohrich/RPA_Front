@@ -23,10 +23,19 @@ export function DiceLoader({ size = 120, fullscreen = false }: Props) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: 'var(--background)',
+            background: 'var(--auth-bg-from)',
             zIndex: 50,
         }}>
             {View}
+            <p style={{
+                marginTop: '12px',
+                fontSize: '13px',
+                letterSpacing: '0.15em',
+                color: 'rgba(255,255,255,0.4)',
+                fontFamily: 'var(--font-cinzel)',
+            }}>
+                Загрузка
+            </p>
         </div>
     )
 }

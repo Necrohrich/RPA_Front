@@ -87,9 +87,12 @@ const ERROR_MESSAGES: Record<string, string> = {
     'Progression engine error':                                 'Ошибка движка прокачки',
 }
 
-const SILENT_CODES = new Set([401]) // 401 обрабатывает интерцептор сам
+// 401 от auth-эндпоинтов обрабатывается в интерцепторе client.ts
+// здесь они уже не доходят, поэтому SILENT_CODES пустой
+const SILENT_CODES = new Set<number>([])
 
 export const handleAxiosError = (error: AxiosError<{detail: string}>): void => {
+    console.log('handleAxiosError called:', error.response?.status, error.response?.data)
     const status = error.response?.status
     const detail = error.response?.data?.detail
 

@@ -26,9 +26,11 @@ apiClient.interceptors.response.use(
     async (error) => {
         const original = error.config
 
+        const isAuthEndpoint = original.url?.includes('/auth/')
+
         // _retry флаг защищает от бесконечного цикла:
         // если refresh сам вернул 401 — не пытаемся рефрешить снова
-        if (error.response?.status === 401 && !original._retry) {
+        if (error.response?.status === 401 && !original._retry && !isAuthEndpoint) {
             original._retry = true
             try {
                 await refreshTokens()
@@ -43,6 +45,7 @@ apiClient.interceptors.response.use(
         }
 
         // все не-401 ошибки показываем пользователю
+        console.log('interceptor error:', error.response?.status, error.config?.url, error.config?._retry)
         handleAxiosError(error)
         return Promise.reject(error)
     })

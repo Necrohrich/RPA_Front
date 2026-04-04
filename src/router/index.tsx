@@ -1,11 +1,11 @@
 // src/router/index.tsx
 import { createBrowserRouter } from 'react-router-dom'
 import {PrivateRoute, PublicRoute} from "@/router/guards.tsx";
+import {LoginPage} from "@/pages/LoginPage.tsx";
+import {RegisterPage} from "@/pages/RegisterPage.tsx";
+import {LandingPage} from "@/pages/LandingPage.tsx";
 
 // Страницы пока заглушки — создадим по одной
-const Landing = () => <div>Landing</div>
-const Login = () => <div>Login</div>
-const Register = () => <div>Register</div>
 const Dashboard = () => <div>Dashboard</div>
 
 export const router = createBrowserRouter([
@@ -13,8 +13,8 @@ export const router = createBrowserRouter([
     {
         element: <PublicRoute />,
         children: [
-            {path: '/login', element: <Login />},
-            { path: '/register', element: <Register /> },
+            {path: '/login', element: <LoginPage />},
+            { path: '/register', element: <RegisterPage /> },
         ]
     },
 
@@ -27,5 +27,5 @@ export const router = createBrowserRouter([
     },
 
     // Лендинг — доступен всем
-    { path: '/', element: <Landing /> },
+    { path: '/', element: <LandingPage /> },
 ])
