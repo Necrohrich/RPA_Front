@@ -49,6 +49,21 @@
       "has_account": "Already have an account? Sign in"
     }
   },
+  "dashboard": {
+    "nav": {
+      "section_main": "Main",
+      "section_account": "Account",
+      "overview": "Overview",
+      "characters": "Characters",
+      "my_games": "My Games",
+      "participated": "Participating",
+      "settings": "Settings",
+      "no_role": "Player",
+      "logout": "Log out",
+      "collapse": "Collapse",
+      "expand": "Expand"
+    }
+  },
   "errors": {
     "default": "Something went wrong",
 

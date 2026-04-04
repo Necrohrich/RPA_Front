@@ -49,6 +49,21 @@
       "has_account": "Уже есть аккаунт? Войти"
     }
   },
+  "dashboard": {
+    "nav": {
+      "section_main": "Основное",
+      "section_account": "Аккаунт",
+      "overview": "Обзор",
+      "characters": "Персонажи",
+      "my_games": "Мои игры",
+      "participated": "Участвую",
+      "settings": "Настройки",
+      "no_role": "Игрок",
+      "logout": "Выйти",
+      "collapse": "Свернуть",
+      "expand": "Развернуть"
+    }
+  },
   "errors": {
     "default": "Что-то пошло не так",
 
