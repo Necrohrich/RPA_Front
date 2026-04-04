@@ -2,12 +2,17 @@
 import { Link } from 'react-router-dom'
 import logo from '@/assets/logo.webp'
 import { DiscordIcon } from '@/components/icons'
+import { useTranslation } from 'react-i18next'
+import { LanguageSwitcher } from '@/components'
 
 const DISCORD_SERVER_URL = 'https://discord.gg/f4ZbA4Zhxy'
 const DISCORD_BOT_URL = 'https://discord.com/oauth2/authorize?client_id=1478025525724315860&permissions=8&' +
     'integration_type=0&scope=bot'
 
 export function LandingPage() {
+
+    const { t } = useTranslation()
+
     return (
         <div
             className="relative flex min-h-screen flex-col overflow-hidden"
@@ -43,7 +48,7 @@ export function LandingPage() {
                         hover:text-white"
                         style={{ border: '1px solid rgba(255,255,255,0.12)' }}
                     >
-                        Документация
+                        {t('nav.docs')}
                     </Link>
                     <a
                         href={DISCORD_BOT_URL}
@@ -53,7 +58,7 @@ export function LandingPage() {
                         hover:text-white"
                         style={{ border: '1px solid rgba(255,255,255,0.12)' }}
                     >
-                        Добавить бота
+                        {t('nav.add_bot')}
                     </a>
                 </div>
 
@@ -73,21 +78,22 @@ export function LandingPage() {
                 </div>
 
                 {/* Правые кнопки */}
-                <div className="flex items-center justify-end gap-2">
+                <div className="flex items-center justify-end gap-3">
+                    <LanguageSwitcher />
                     <Link
                         to="/login"
                         className="rounded-md px-4 py-1.5 text-xs font-medium text-white/60 transition-colors
                         hover:text-white"
                         style={{ border: '1px solid rgba(255,255,255,0.12)' }}
                     >
-                        Войти
+                        {t('nav.login')}
                     </Link>
                     <Link
                         to="/register"
                         className="rounded-md px-4 py-1.5 text-xs font-medium text-white transition-colors
                         hover:bg-brand-hover bg-brand"
                     >
-                        Создать аккаунт
+                        {t('nav.register')}
                     </Link>
                 </div>
             </nav>
@@ -106,7 +112,7 @@ export function LandingPage() {
                 }}
             >
                 <span className="text-xs text-white/25">
-                    © {new Date().getFullYear()} Role Play Asylum
+                   {t('footer.copyright', { year: new Date().getFullYear() })}
                 </span>
 
                 <a

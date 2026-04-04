@@ -7,33 +7,35 @@ import { AuthLayout } from '@/components/layout'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/useAuth'
+import { useTranslation } from 'react-i18next'
+import { useMemo } from 'react'
+import { type TFunction } from 'i18next'
 
-const schema = z.object({
+const createSchema = (t: TFunction) => z.object({
     login: z.string()
-        .min(3, 'Минимум 3 символа')
-        .max(30, 'Максимум 30 символов')
-        .regex(/^[a-zA-Z0-9_]+$/, 'Только латинские буквы, цифры и _'),
-    email: z.string().check(z.email('Некорректный email')),
+        .min(3, t('auth.register.login_min'))
+        .max(30, t('auth.register.login_max'))
+        .regex(/^[a-zA-Z0-9_]+$/, t('auth.register.login_pattern')),
+    email: z.string().check(z.email(t('auth.register.email_invalid'))),
     password: z.string()
-        .min(8, 'Минимум 8 символов')
-        .max(128, 'Максимум 128 символов')
-        .regex(/[A-Z]/, 'Нужна минимум одна заглавная буква')
-        .regex(/[a-z]/, 'Нужна минимум одна строчная буква')
-        .regex(/[0-9]/, 'Нужна минимум одна цифра')
-        .regex(/[^A-Za-z0-9]/, 'Нужен минимум один спецсимвол'),
+        .min(8, t('auth.register.password_min'))
+        .max(128, t('auth.register.password_max'))
+        .regex(/[A-Z]/, t('auth.register.password_upper'))
+        .regex(/[a-z]/, t('auth.register.password_lower'))
+        .regex(/[0-9]/, t('auth.register.password_digit'))
+        .regex(/[^A-Za-z0-9]/, t('auth.register.password_special')),
     confirmPassword: z.string(),
 }).refine(
     (data) => data.password === data.confirmPassword,
-    {
-        message: 'Пароли не совпадают',
-        path: ['confirmPassword'],  // ошибка появится под confirmPassword
-    }
+    { message: t('auth.register.confirm_mismatch'), path: ['confirmPassword'] }
 )
 
-type FormData = z.infer<typeof schema>
+type FormData = z.infer<ReturnType<typeof createSchema>>
 
 export function RegisterPage() {
     const { register: registerUser, isRegisterPending } = useAuth()
+    const { t } = useTranslation()
+    const schema = useMemo(() => createSchema(t), [t])
 
     const {
         register,
@@ -64,11 +66,11 @@ export function RegisterPage() {
                     {/* Логин */}
                     <div className="space-y-1.5">
                         <label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/50">
-                            Логин
+                            {t('auth.register.login_label')}
                         </label>
                         <Input
                             type="text"
-                            placeholder="adventurer"
+                            placeholder={t('auth.register.login_placeholder')}
                             {...register('login')}
                             className={inputCn}
                         />
@@ -80,11 +82,11 @@ export function RegisterPage() {
                     {/* Email */}
                     <div className="space-y-1.5">
                         <label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/50">
-                            Email
+                            {t('auth.register.email_label')}
                         </label>
                         <Input
                             type="email"
-                            placeholder="you@example.com"
+                            placeholder={t('auth.register.email_placeholder')}
                             {...register('email')}
                             className={inputCn}
                         />
@@ -96,11 +98,11 @@ export function RegisterPage() {
                     {/* Пароль */}
                     <div className="space-y-1.5">
                         <label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/50">
-                            Пароль
+                            {t('auth.register.password_label')}
                         </label>
                         <Input
                             type="password"
-                            placeholder="Минимум 8 символов"
+                            placeholder={t('auth.register.password_placeholder')}
                             {...register('password')}
                             className={inputCn}
                         />
@@ -112,11 +114,11 @@ export function RegisterPage() {
                     {/* Подтверждение пароля */}
                     <div className="space-y-1.5">
                         <label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/50">
-                            Подтвердите пароль
+                            {t('auth.register.confirm_label')}
                         </label>
                         <Input
                             type="password"
-                            placeholder="••••••••"
+                            placeholder={t('auth.register.confirm_placeholder')}
                             {...register('confirmPassword')}
                             className={inputCn}
                         />
@@ -131,7 +133,7 @@ export function RegisterPage() {
                         disabled={isRegisterPending}
                         onClick={handleSubmit(onSubmit)}
                     >
-                        {isRegisterPending ? 'Создаём аккаунт...' : 'Создать аккаунт'}
+                        {isRegisterPending ? t('auth.register.submitting') : t('auth.register.submit')}
                     </Button>
 
                 </div>
@@ -142,7 +144,7 @@ export function RegisterPage() {
                         to="/login"
                         className="text-sm text-white/40 transition-colors hover:text-brand"
                     >
-                        Уже есть аккаунт? Войти
+                        {t('auth.register.has_account')}
                     </Link>
                 </div>
             </div>

@@ -1,5 +1,7 @@
+// src/components/common/DiceLoader.tsx
 import { useLottie } from 'lottie-react'
 import animationData from '@/assets/d20.json'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
     size?: number
@@ -7,6 +9,8 @@ type Props = {
 }
 
 export function DiceLoader({ size = 120, fullscreen = false }: Props) {
+    const { t } = useTranslation()
+
     const { View } = useLottie({
         animationData,
         loop: true,
@@ -34,7 +38,7 @@ export function DiceLoader({ size = 120, fullscreen = false }: Props) {
                 color: 'rgba(255,255,255,0.4)',
                 fontFamily: 'var(--font-cinzel)',
             }}>
-                Загрузка
+                {t('common.loading')}
             </p>
         </div>
     )

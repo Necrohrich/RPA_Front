@@ -1,6 +1,7 @@
 // src/components/layout/AuthLayout.tsx
 import { type ReactNode } from 'react'
 import logo from '@/assets/logo.webp'
+import { LanguageSwitcher } from '@/components'
 
 interface AuthLayoutProps {
     children: ReactNode
@@ -46,6 +47,10 @@ export function AuthLayout({children}: AuthLayoutProps){
 
             {/* Слот — карточка формы */}
             <div className="relative z-10 w-full max-w-sm">
+                {/* Переключатель языка */}
+                <div className="absolute top-4 right-4 z-10">
+                    <LanguageSwitcher />
+                </div>
                 {children}
             </div>
         </div>

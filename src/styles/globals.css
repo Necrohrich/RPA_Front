@@ -111,6 +111,9 @@
         --footer-bg:        rgba(13, 17, 23, 0.6);
         --nav-border:       rgba(17, 128, 106, 0.15);
         --footer-border:    rgba(17, 128, 106, 0.12);
+        --lang-switcher-glow:   rgba(17, 128, 106, 0.5);
+        --lang-inactive:        rgba(255, 255, 255, 0.35);
+        --lang-switcher-border: rgba(255, 255, 255, 0.08);
     }
 
     .dark {

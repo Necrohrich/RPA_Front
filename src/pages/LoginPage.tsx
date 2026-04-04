@@ -7,16 +7,21 @@ import { AuthLayout } from '@/components/layout'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/useAuth'
+import { useTranslation } from 'react-i18next'
+import { useMemo } from 'react'
+import { type TFunction } from 'i18next'
 
-const schema = z.object({
-    email: z.string().check(z.email('Некорректный email')),
-    password: z.string().min(8, 'Минимум 8 символов'),
+const createSchema = (t: TFunction) => z.object({
+    email: z.string().check(z.email(t('auth.login.email_invalid'))),
+    password: z.string().min(8, t('auth.login.password_min')),
 })
 
-type FormData = z.infer<typeof schema>
+type FormData = z.infer<ReturnType<typeof createSchema>>
 
 export function LoginPage() {
     const {login, isLoginPending} = useAuth()
+    const { t } = useTranslation()
+    const schema = useMemo(() => createSchema(t), [t])
 
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>({
         resolver: zodResolver(schema),
@@ -40,11 +45,11 @@ export function LoginPage() {
                     {/* Email */}
                     <div className="space-y-1.5">
                         <label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/50">
-                            Email
+                            {t('auth.login.email_label')}
                         </label>
                         <Input
                             type="email"
-                            placeholder="you@example.com"
+                            placeholder={t('auth.login.email_placeholder')}
                             {...register('email')}
                             className={inputCn}
                         />
@@ -56,11 +61,11 @@ export function LoginPage() {
                     {/* Пароль */}
                     <div className="space-y-1.5">
                         <label className="text-[11px] font-medium uppercase tracking-[0.08em] text-white/50">
-                            Пароль
+                            {t('auth.login.password_label')}
                         </label>
                         <Input
                             type="password"
-                            placeholder="••••••••"
+                            placeholder={t('auth.login.password_placeholder')}
                             {...register('password')}
                             className={inputCn}
                         />
@@ -75,7 +80,7 @@ export function LoginPage() {
                         disabled={isLoginPending}
                         onClick={handleSubmit(onSubmit)}
                     >
-                        {isLoginPending ? 'Входим...' : 'Войти'}
+                        {isLoginPending ? t('auth.login.submitting') : t('auth.login.submit')}
                     </Button>
 
                 </div>
@@ -86,7 +91,7 @@ export function LoginPage() {
                         to="/register"
                         className="text-sm text-white/40 transition-colors hover:text-brand"
                     >
-                        Создать аккаунт
+                        {t('auth.login.no_account')}
                     </Link>
                 </div>
             </div>
