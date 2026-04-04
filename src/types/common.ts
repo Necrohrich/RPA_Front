@@ -1,0 +1,9 @@
+// src/types/common.ts
+
+export type Paginated<T> = {
+    items: T[]
+    total: number
+    page: number
+    page_size: number
+    total_pages: number
+}
