@@ -1,6 +1,8 @@
+// src/api/client.ts
 import axios from 'axios'
 import {tokenStorage} from '@/api/tokenStorage.ts'
 import {refreshTokens} from "@/api/refreshTokens.ts";
+import { handleAxiosError } from '@/api/errorHandler'
 
 export const apiClient = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -19,7 +21,7 @@ apiClient.interceptors.request.use((config) => {
 
 // ── Response интерцептор ──────────────────────────────────────────────────────
 // Перехватывает 401 и запускает тихий refresh
-apiClient.interceptors.request.use(
+apiClient.interceptors.response.use(
     (response) => response,
     async (error) => {
         const original = error.config
@@ -39,5 +41,8 @@ apiClient.interceptors.request.use(
                 return Promise.reject(error)
             }
         }
+
+        // все не-401 ошибки показываем пользователю
+        handleAxiosError(error)
         return Promise.reject(error)
     })
