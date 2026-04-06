@@ -11,34 +11,34 @@
     --font-cinzel:  'Cinzel', serif;
     --font-heading: var(--font-sans);
 
-    --color-background:           hsl(222 47% 6%);
+    --color-background:           hsl(220 20% 5%);
     --color-foreground:           hsl(210 40% 98%);
-    --color-card:                 hsl(222 47% 8%);
+    --color-card:                 hsl(220 20% 7%);
     --color-card-foreground:      hsl(210 40% 98%);
-    --color-popover:              hsl(222 47% 8%);
+    --color-popover:              hsl(220 20% 7%);
     --color-popover-foreground:   hsl(210 40% 98%);
     --color-primary:              hsl(160 73% 40%);
     --color-primary-foreground:   hsl(0 0% 100%);
-    --color-secondary:            hsl(217 33% 17%);
+    --color-secondary:            hsl(220 15% 13%);
     --color-secondary-foreground: hsl(210 40% 98%);
-    --color-muted:                hsl(217 33% 17%);
+    --color-muted:                hsl(220 15% 13%);
     --color-muted-foreground:     hsl(215 20% 65%);
     --color-accent:               hsl(160 73% 40%);
     --color-accent-foreground:    hsl(0 0% 100%);
     --color-destructive:          hsl(0 72% 51%);
-    --color-border:               hsl(217 33% 17%);
-    --color-input:                hsl(217 33% 17%);
+    --color-border:               hsl(220 15% 13%);
+    --color-input:                hsl(220 15% 13%);
     --color-ring:                 hsl(160 73% 40%);
     --color-brand:                #11806a;
     --color-brand-hover:          #14967c;
 
-    --color-sidebar:                   hsl(222 47% 8%);
+    --color-sidebar:                   hsl(220 20% 7%);
     --color-sidebar-foreground:        hsl(210 40% 98%);
     --color-sidebar-primary:           hsl(160 73% 40%);
     --color-sidebar-primary-foreground: hsl(0 0% 100%);
-    --color-sidebar-accent:            hsl(217 33% 17%);
+    --color-sidebar-accent:            hsl(220 15% 13%);
     --color-sidebar-accent-foreground: hsl(210 40% 98%);
-    --color-sidebar-border:            hsl(217 33% 17%);
+    --color-sidebar-border:            hsl(220 15% 13%);
     --color-sidebar-ring:              hsl(160 73% 40%);
 
     --color-chart-1: hsl(160 73% 40%);
@@ -57,23 +57,23 @@
 /* ── Наша палитра (заменяет серый дефолт shadcn) ─────────── */
 @layer base {
     :root {
-        --background:            222 47% 6%;
+        --background:            220 20% 5%;
         --foreground:            210 40% 98%;
-        --card:                  222 47% 8%;
+        --card:                  220 20% 7%;
         --card-foreground:       210 40% 98%;
-        --popover:               222 47% 8%;
+        --popover:               220 20% 7%;
         --popover-foreground:    210 40% 98%;
         --primary:               160 73% 40%;
         --primary-foreground:    0 0% 100%;
-        --secondary:             217 33% 17%;
+        --secondary:             220 15% 13%;
         --secondary-foreground:  210 40% 98%;
-        --muted:                 217 33% 17%;
+        --muted:                 220 15% 13%;
         --muted-foreground:      215 20% 65%;
         --accent:                160 73% 40%;
         --accent-foreground:     0 0% 100%;
         --destructive:           0 72% 51%;
-        --border:                217 33% 17%;
-        --input:                 217 33% 17%;
+        --border:                220 15% 13%;
+        --input:                 220 15% 13%;
         --ring:                  160 73% 40%;
         --radius:                0.5rem;
 
@@ -85,13 +85,13 @@
         --chart-5: 160 25% 75%;
 
         /* sidebar */
-        --sidebar:                   222 47% 8%;
+        --sidebar:                   220 20% 7%;
         --sidebar-foreground:        210 40% 98%;
         --sidebar-primary:           160 73% 40%;
         --sidebar-primary-foreground: 0 0% 100%;
-        --sidebar-accent:            217 33% 17%;
+        --sidebar-accent:            220 15% 13%;
         --sidebar-accent-foreground: 210 40% 98%;
-        --sidebar-border:            217 33% 17%;
+        --sidebar-border:            220 15% 13%;
         --sidebar-ring:              160 73% 40%;
 
         /* auth layout */
@@ -116,15 +116,15 @@
     }
 
     html {
-        background-color: hsl(222 47% 6%);
+        background-color: hsl(220 20% 5%);
         @apply font-sans;
     }
     body {
-        background-color: hsl(222 47% 6%);
+        background-color: hsl(220 20% 5%);
         color: hsl(210 40% 98%);
     }
     * {
-        border-color: hsl(217 33% 17%);
+        border-color: hsl(220 15% 13%);
     }
 }
 
