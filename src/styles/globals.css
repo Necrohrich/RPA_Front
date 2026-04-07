@@ -60,6 +60,13 @@
             grid-template-rows: repeat(2, minmax(0, 1fr));
         }
     }
+    .scrollbar-hidden {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE */
+    }
+    .scrollbar-hidden::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
 }
 
 /* ── Наша палитра (заменяет серый дефолт shadcn) ─────────── */

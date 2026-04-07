@@ -113,7 +113,7 @@ export function ReviewsWidget({ className }: { className?: string }) {
                 'bg-card border border-border rounded-md flex flex-col flex-1 min-h-0 relative z-10',
                 getCardRadiusClass(activeIndex),
             )}>
-                <div className="px-4 py-1 flex-1 overflow-y-auto">
+                <div className="px-4 py-1 flex-1 overflow-y-auto scrollbar-hidden">
                     {isLoading ? (
                         // скелетон — показываем 3 заглушки
                         Array.from({ length: 3 }, (_, i) => <ReviewSkeleton key={i} />)

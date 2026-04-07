@@ -90,6 +90,11 @@
       "empty": "No games yet",
       "go_to_game": "Go to game",
       "create_game": "Create game"
+    },
+    "characters": {
+      "tab": "Characters",
+      "empty": "No characters yet",
+      "add": "Add character"
     }
   },
   "errors": {

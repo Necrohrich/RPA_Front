@@ -1,5 +1,5 @@
 // src/pages/DashboardPage.tsx
-import { ProfileWidget, ReviewsWidget, LastGameWidget } from '@/components/dashboard'
+import {ProfileWidget, ReviewsWidget, LastGameWidget, CharactersWidget} from '@/components/dashboard'
 
 export function DashboardPage() {
     return (
@@ -10,7 +10,7 @@ export function DashboardPage() {
                 className="min-h-[280px] lg:min-h-0"
                 onCreateGame={() => console.log('TODO: open create game modal')}
             />
-            <div className="bg-card border border-border rounded-md min-h-[280px] lg:min-h-0" />
+            <CharactersWidget className="min-h-[280px] lg:min-h-0" />
         </div>
     )
 }

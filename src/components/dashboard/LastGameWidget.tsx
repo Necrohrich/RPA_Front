@@ -25,8 +25,7 @@ function SessionPreview({ game, session, isLoading }: SessionPreviewProps) {
     const { t } = useTranslation()
 
     return (
-        // убираем overflow-y-auto отсюда — скролл вешаем на внешний контейнер
-        <div className="flex flex-col min-h-0 flex-1">
+        <div className="px-4 py-1 flex-1 overflow-y-auto scrollbar-hidden">
             {/* Обложка — shrink-0 чтобы не сжималась */}
             <div className="relative w-full h-[72px] shrink-0 bg-secondary rounded-sm overflow-hidden mb-2">
                 {session?.image_url ? (

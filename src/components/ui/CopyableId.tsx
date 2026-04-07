@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import * as React from "react";
 
 type Props = {
     id: string
@@ -12,7 +13,8 @@ type Props = {
 export function CopyableId({ id, className }: Props) {
     const [copied, setCopied] = useState(false)
 
-    const handleCopy = async () => {
+    const handleCopy = async (e: React.MouseEvent) => {
+        e.stopPropagation()  // не даём клику всплыть до родительской кнопки
         await navigator.clipboard.writeText(id)
         setCopied(true)
         setTimeout(() => setCopied(false), 1500)

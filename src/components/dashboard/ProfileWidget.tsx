@@ -185,7 +185,7 @@ export function ProfileWidget({ className }: { className?: string }) {
             </div>
 
             {/* ── Поля ── */}
-            <div className="px-4 py-2 flex-1 min-w-0 overflow-y-auto">
+            <div className="px-4 py-1 flex-1 overflow-y-auto scrollbar-hidden">
                 <FieldRow
                     label={t('dashboard.profile.email')}
                     value={user?.primary_email ?? null}
