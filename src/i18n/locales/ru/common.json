@@ -81,6 +81,15 @@
       "no_comment": "Без комментария",
       "no_rating": "Без оценки",
       "empty": "Отзывов пока нет"
+    },
+    "last_game": {
+      "tab_mine": "Мои игры",
+      "tab_participated": "Участвую",
+      "session_number": "Сессия №{{n}}",
+      "no_session": "Сессий ещё не было",
+      "empty": "Игр пока нет",
+      "go_to_game": "Перейти к игре",
+      "create_game": "Создать игру"
     }
   },
   "errors": {

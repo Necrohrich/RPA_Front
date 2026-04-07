@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/useAuth'
 import { useUpdateSecondaryEmail, useChangePassword } from '@/hooks/useProfile'
 import { toast } from 'sonner'
+import {CopyableId} from "@/components/ui/CopyableId.tsx";
 
 // ── FieldRow ──────────────────────────────────────────────────────────────────
 
@@ -138,7 +139,10 @@ export function ProfileWidget({ className }: { className?: string }) {
                         {initials}
                     </div>
                     <div className="min-w-0">
-                        <p className="text-[13px] font-medium text-foreground truncate">{user?.login}</p>
+                        <div className="flex items-center gap-1.5 min-w-0">
+                            <p className="text-[13px] font-medium text-foreground truncate">{user?.login}</p>
+                            {user?.id && <CopyableId id={user.id} />}
+                        </div>
                         <p className="text-[10px] text-muted-foreground">
                             {user?.platform_role ?? t('dashboard.nav.no_role')}
                         </p>

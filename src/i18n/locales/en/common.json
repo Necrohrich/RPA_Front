@@ -81,6 +81,15 @@
       "no_comment": "No comment",
       "no_rating": "No rating",
       "empty": "No reviews yet"
+    },
+    "last_game": {
+      "tab_mine": "My games",
+      "tab_participated": "Participating",
+      "session_number": "Session #{{n}}",
+      "no_session": "No sessions yet",
+      "empty": "No games yet",
+      "go_to_game": "Go to game",
+      "create_game": "Create game"
     }
   },
   "errors": {
