@@ -26,18 +26,15 @@ export function FolderTabs<T extends string>({ tabs, active, onChange, className
                         key={tab.key}
                         onClick={() => onChange(tab.key)}
                         className={cn(
-                            // базовые стили
                             'relative px-3 py-1.5 text-[11px] font-medium transition-all duration-150',
                             'border border-b-0 rounded-t-md select-none whitespace-nowrap',
-                            // налезание вкладок друг на друга
                             i > 0 && '-ml-px',
                             isActive
-                                ? 'bg-card border-border text-foreground z-10 translate-y-0'
+                                ? 'bg-card border-border text-foreground z-10'
                                 : [
-                                    'bg-secondary text-muted-foreground translate-y-[4px] z-0',
+                                    'bg-secondary border-border/50 text-muted-foreground z-0',
                                     'hover:text-foreground hover:bg-secondary/80',
-                                    // если левый сосед активен — его border перекрывает нас,
-                                    // поэтому левый border не нужен
+                                    'translate-y-[3px]',   // уходит вниз
                                     prevIsActive && 'border-l-transparent',
                                 ],
                         )}

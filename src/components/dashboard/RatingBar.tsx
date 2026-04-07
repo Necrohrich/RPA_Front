@@ -4,19 +4,19 @@ import { cn } from '@/lib/utils'
 import type { ReviewRating } from '@/types'
 
 const RATING_TO_FILLED: Record<ReviewRating, number> = {
-    TERRIBLE:  1,
-    BAD:       2,
-    NEUTRAL:   3,
-    GOOD:      4,
-    EXCELLENT: 5,
+    terrible:  1,
+    bad:       2,
+    neutral:   3,
+    good:      4,
+    excellent: 5,
 }
 
-const RATING_COLOR: Record<ReviewRating, string> = {
-    TERRIBLE:  'bg-red-500',
-    BAD:       'bg-orange-400',
-    NEUTRAL:   'bg-yellow-400',
-    GOOD:      'bg-brand',
-    EXCELLENT: 'bg-emerald-400',
+const RATING_COLOR_STYLE: Record<ReviewRating, string> = {
+    terrible:  '#ef4444',
+    bad:       '#fb923c',
+    neutral:   '#facc15',
+    good:      '#11806a',
+    excellent: '#34d399',
 }
 
 type Props = {
@@ -26,17 +26,15 @@ type Props = {
 
 export function RatingBar({ rating, className }: Props) {
     const filled = RATING_TO_FILLED[rating]
-    const color  = RATING_COLOR[rating]
+    const color  = RATING_COLOR_STYLE[rating]
 
     return (
         <div className={cn('flex items-center gap-[3px]', className)}>
             {Array.from({ length: 5 }, (_, i) => (
                 <span
                     key={i}
-                    className={cn(
-                        'inline-block w-[10px] h-[10px] rounded-full',
-                        i < filled ? color : 'bg-secondary',
-                    )}
+                    className="inline-block w-[10px] h-[10px] rounded-full"
+                    style={{ backgroundColor: i < filled ? color : 'hsl(var(--secondary))' }}
                 />
             ))}
         </div>

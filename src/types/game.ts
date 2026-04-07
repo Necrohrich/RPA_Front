@@ -42,9 +42,9 @@ export type Character = {
     dice_mode: string | null
 }
 
-export type ReviewRating = 'TERRIBLE' | 'BAD' | 'NEUTRAL' | 'GOOD' | 'EXCELLENT'
-export type ReviewStatus = 'CREATED' | 'SEND' | 'CANCELED'
-export type ReviewAnonymity = 'PUBLIC' | 'PRIVATE'
+export type ReviewRating = 'terrible' | 'bad' | 'neutral' | 'good' | 'excellent'
+export type ReviewStatus = 'created' | 'send' | 'canceled'
+export type ReviewAnonymity = 'public' | 'private'
 
 export type GameReview = {
     id: string

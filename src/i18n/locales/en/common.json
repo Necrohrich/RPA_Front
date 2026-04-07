@@ -73,6 +73,14 @@
       "new_password": "New password",
       "email_updated": "Email updated",
       "password_updated": "Password changed"
+    },
+    "reviews": {
+      "tab_mine": "My reviews",
+      "tab_on_my_games": "On my games",
+      "unknown_game": "Unknown game",
+      "no_comment": "No comment",
+      "no_rating": "No rating",
+      "empty": "No reviews yet"
     }
   },
   "errors": {
@@ -136,7 +144,7 @@
   },
   "common": {
     "loading": "Loading",
-    "cancel": "Отмена",
-    "save": "Сохранить"
+    "cancel": "Cancel",
+    "save": "Save"
   }
 }

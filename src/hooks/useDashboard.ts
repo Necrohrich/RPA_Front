@@ -6,12 +6,12 @@ import type { Character, Game, GameReview, GameSession, Paginated } from '@/type
 const dashboardApi = {
     myGames: () =>
         apiClient
-            .get<Paginated<Game>>('/users/me/games', { params: { page: 1, page_size: 5 } })
+            .get<Paginated<Game>>('/users/me/games', { params: { page: 1, page_size: 50 } })
             .then(r => r.data),
 
     participatedGames: () =>
         apiClient
-            .get<Paginated<Game>>('/users/me/games/participated', { params: { page: 1, page_size: 5 } })
+            .get<Paginated<Game>>('/users/me/games/participated', { params: { page: 1, page_size: 50 } })
             .then(r => r.data),
 
     myCharacters: () =>

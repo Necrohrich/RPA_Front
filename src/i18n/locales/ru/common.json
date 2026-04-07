@@ -73,6 +73,14 @@
       "new_password": "Новый пароль",
       "email_updated": "Email обновлён",
       "password_updated": "Пароль изменён"
+    },
+    "reviews": {
+      "tab_mine": "Мои отзывы",
+      "tab_on_my_games": "На мои игры",
+      "unknown_game": "Неизвестная игра",
+      "no_comment": "Без комментария",
+      "no_rating": "Без оценки",
+      "empty": "Отзывов пока нет"
     }
   },
   "errors": {
@@ -135,6 +143,8 @@
     "Progression engine error": "Ошибка движка прокачки"
   },
   "common": {
-    "loading": "Загрузка"
+    "loading": "Загрузка",
+    "cancel": "Отмена",
+    "save": "Сохранить"
   }
 }
