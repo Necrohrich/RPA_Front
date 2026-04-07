@@ -5,9 +5,8 @@ import {LoginPage} from "@/pages/LoginPage.tsx";
 import {RegisterPage} from "@/pages/RegisterPage.tsx";
 import {LandingPage} from "@/pages/LandingPage.tsx";
 import { DashboardLayout } from '@/components/layout';
+import { DashboardPage } from '@/pages/DashboardPage'
 
-// Страницы пока заглушки — создадим по одной
-const Dashboard = () => <div>Dashboard</div>
 
 export const router = createBrowserRouter([
     // Публичные маршруты — авторизованных редиректит на /dashboard
@@ -26,11 +25,16 @@ export const router = createBrowserRouter([
             {
                 element: <DashboardLayout />,
                 children: [
-                    { path: '/dashboard',              element: <Dashboard />, handle: { titleKey: 'dashboard.nav.overview' } },
-                    { path: '/dashboard/characters',   element: <div />,       handle: { titleKey: 'dashboard.nav.characters' } },
-                    { path: '/dashboard/games',        element: <div />,       handle: { titleKey: 'dashboard.nav.my_games' } },
-                    { path: '/dashboard/participated', element: <div />,       handle: { titleKey: 'dashboard.nav.participated' } },
-                    { path: '/dashboard/settings',     element: <div />,       handle: { titleKey: 'dashboard.nav.settings' } },
+                    { path: '/dashboard', element: <DashboardPage />,
+                        handle: { titleKey: 'dashboard.nav.overview' } },
+                    { path: '/dashboard/characters',   element: <div />,
+                        handle: { titleKey: 'dashboard.nav.characters' } },
+                    { path: '/dashboard/games',        element: <div />,
+                        handle: { titleKey: 'dashboard.nav.my_games' } },
+                    { path: '/dashboard/participated', element: <div />,
+                        handle: { titleKey: 'dashboard.nav.participated' } },
+                    { path: '/dashboard/settings',     element: <div />,
+                        handle: { titleKey: 'dashboard.nav.settings' } },
                 ],
             },
         ],

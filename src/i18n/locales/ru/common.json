@@ -62,6 +62,17 @@
       "logout": "Выйти",
       "collapse": "Свернуть",
       "expand": "Развернуть"
+    },
+    "profile": {
+      "edit": "Редактировать профиль",
+      "email": "Email",
+      "secondary_email": "Доп. email",
+      "not_set": "не указан",
+      "change_password": "Смена пароля",
+      "old_password": "Текущий пароль",
+      "new_password": "Новый пароль",
+      "email_updated": "Email обновлён",
+      "password_updated": "Пароль изменён"
     }
   },
   "errors": {
