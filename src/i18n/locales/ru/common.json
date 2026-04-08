@@ -95,6 +95,19 @@
       "tab": "Персонажи",
       "empty": "Персонажей пока нет",
       "add": "Добавить персонажа"
+    },
+    "settings": {
+      "section_contacts": "Контакты",
+      "section_security": "Безопасность",
+      "section_discord": "Discord",
+      "secondary_email_label": "Дополнительный email",
+      "secondary_email_placeholder": "you@example.com",
+      "discord_primary": "Основной аккаунт",
+      "discord_secondary": "Дополнительный аккаунт",
+      "discord_not_linked": "не привязан",
+      "discord_hint": "Для привязки Discord войдите через Discord-аккаунт в меню авторизации",
+      "confirm_password": "Подтвердите новый пароль",
+      "confirm_mismatch": "Пароли не совпадают"
     }
   },
   "errors": {

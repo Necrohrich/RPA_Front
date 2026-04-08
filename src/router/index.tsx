@@ -6,6 +6,7 @@ import {RegisterPage} from "@/pages/RegisterPage.tsx";
 import {LandingPage} from "@/pages/LandingPage.tsx";
 import { DashboardLayout } from '@/components/layout';
 import { DashboardPage } from '@/pages/DashboardPage'
+import {SettingsPage} from "@/pages/SettingsPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
                         handle: { titleKey: 'dashboard.nav.my_games' } },
                     { path: '/dashboard/participated', element: <div />,
                         handle: { titleKey: 'dashboard.nav.participated' } },
-                    { path: '/dashboard/settings',     element: <div />,
+                    { path: '/dashboard/settings', element: <SettingsPage />,
                         handle: { titleKey: 'dashboard.nav.settings' } },
                 ],
             },
