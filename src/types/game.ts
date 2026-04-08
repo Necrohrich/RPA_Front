@@ -59,3 +59,11 @@ export type GameReview = {
     best_npc: string[] | null
     best_player_id: string | null
 }
+
+export type GameSystem = {
+    id: string
+    name: string
+    description: string | null
+    version: string
+    is_active: boolean
+}

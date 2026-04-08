@@ -108,6 +108,29 @@
       "discord_hint": "To link Discord, sign in through your Discord account in the auth menu",
       "confirm_password": "Confirm new password",
       "confirm_mismatch": "Passwords do not match"
+    },
+    "characters_page": {
+      "search_placeholder": "Search by name...",
+      "filter_system": "All systems",
+      "filter_no_system": "No system",
+      "create_btn": "Create character",
+      "empty": "No characters found",
+      "delete_confirm_title": "Delete character?",
+      "delete_confirm_desc": "Character «{{name}}» will be deleted. This action is irreversible.",
+      "delete_confirm_ok": "Delete",
+      "no_game": "No game",
+      "no_system": "No system",
+      "create_title": "New character",
+      "create_name": "Character name",
+      "create_name_placeholder": "Enter name...",
+      "create_system": "Game system",
+      "create_system_none": "No system",
+      "create_submit": "Create",
+      "edit_title": "Edit character",
+      "edit_submit": "Save",
+      "edit_avatar": "Avatar URL",
+      "edit_avatar_placeholder": "https://...",
+      "system_not_found": "System not found"
     }
   },
   "errors": {

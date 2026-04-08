@@ -108,6 +108,29 @@
       "discord_hint": "Для привязки Discord войдите через Discord-аккаунт в меню авторизации",
       "confirm_password": "Подтвердите новый пароль",
       "confirm_mismatch": "Пароли не совпадают"
+    },
+    "characters_page": {
+      "search_placeholder": "Поиск по имени...",
+      "filter_system": "Все системы",
+      "filter_no_system": "Без системы",
+      "create_btn": "Создать персонажа",
+      "empty": "Персонажей не найдено",
+      "delete_confirm_title": "Удалить персонажа?",
+      "delete_confirm_desc": "Персонаж «{{name}}» будет удалён. Это действие необратимо.",
+      "delete_confirm_ok": "Удалить",
+      "no_game": "Без игры",
+      "no_system": "Без системы",
+      "create_title": "Новый персонаж",
+      "create_name": "Имя персонажа",
+      "create_name_placeholder": "Введите имя...",
+      "create_system": "Игровая система",
+      "create_system_none": "Без системы",
+      "create_submit": "Создать",
+      "edit_title": "Редактировать персонажа",
+      "edit_submit": "Сохранить",
+      "edit_avatar": "Ссылка на аватар",
+      "edit_avatar_placeholder": "https://...",
+      "system_not_found": "Система не найдена"
     }
   },
   "errors": {

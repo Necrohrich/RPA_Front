@@ -142,7 +142,7 @@ export function CharactersWidget({ className }: { className?: string }) {
                 {/* Кнопка добавить */}
                 <div className="mt-3 pt-3 border-t border-border/40 shrink-0">
                     <button
-                        onClick={() => navigate('/dashboard/characters/new')}
+                        onClick={() => navigate('/dashboard/characters?create=true')}
                         className={cn(
                             'w-full flex items-center justify-center gap-1.5',
                             'px-3 py-1.5 rounded text-[12px] font-medium',

@@ -7,6 +7,7 @@ import {LandingPage} from "@/pages/LandingPage.tsx";
 import { DashboardLayout } from '@/components/layout';
 import { DashboardPage } from '@/pages/DashboardPage'
 import {SettingsPage} from "@/pages/SettingsPage.tsx";
+import {CharactersPage} from "@/pages/CharactersPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -28,7 +29,9 @@ export const router = createBrowserRouter([
                 children: [
                     { path: '/dashboard', element: <DashboardPage />,
                         handle: { titleKey: 'dashboard.nav.overview' } },
-                    { path: '/dashboard/characters',   element: <div />,
+                    { path: '/dashboard/characters', element: <CharactersPage />,
+                        handle: { titleKey: 'dashboard.nav.characters' } },
+                    { path: '/dashboard/characters/:id', element: <div />,
                         handle: { titleKey: 'dashboard.nav.characters' } },
                     { path: '/dashboard/games',        element: <div />,
                         handle: { titleKey: 'dashboard.nav.my_games' } },
