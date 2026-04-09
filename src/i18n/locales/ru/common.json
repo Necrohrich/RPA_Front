@@ -3,7 +3,8 @@
     "docs": "Документация",
     "add_bot": "Добавить бота",
     "login": "Войти",
-    "register": "Создать аккаунт"
+    "register": "Создать аккаунт",
+    "systems": "Системы"
   },
   "footer": {
     "copyright": "© {{year}} Role Play Asylum"
@@ -53,10 +54,12 @@
     "nav": {
       "section_main": "Основное",
       "section_account": "Аккаунт",
+      "section_creator": "Контент",
       "overview": "Обзор",
       "characters": "Персонажи",
       "my_games": "Мои игры",
       "participated": "Участвую",
+      "systems": "Системы",
       "settings": "Настройки",
       "no_role": "Игрок",
       "logout": "Выйти",
@@ -171,6 +174,22 @@
       "detach": "Отвязать",
       "detach_first": "Сначала отвяжите текущего персонажа",
       "no_compatible_characters": "Нет подходящих персонажей"
+    },
+    "systems_page": {
+      "search_placeholder": "Поиск по названию...",
+      "create_btn": "Создать систему",
+      "empty": "Игровых систем не найдено",
+      "no_description": "Нет описания",
+      "inactive_badge": "Неактивна",
+      "author_label": "Автор",
+      "delete_confirm_title": "Удалить систему?",
+      "delete_confirm_desc": "Система «{{name}}» будет удалена. Это действие необратимо.",
+      "delete_confirm_ok": "Система удалена",
+      "toggle_active_ok": "Статус системы обновлён",
+      "create_ok": "Система создана",
+      "update_ok": "Система обновлена",
+      "name_label": "Название",
+      "description_label": "Описание"
     }
   },
   "errors": {

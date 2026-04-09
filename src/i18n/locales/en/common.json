@@ -3,7 +3,8 @@
     "docs": "Documentation",
     "add_bot": "Add Bot",
     "login": "Sign In",
-    "register": "Create Account"
+    "register": "Create Account",
+    "systems": "Systems"
   },
   "footer": {
     "copyright": "© {{year}} Role Play Asylum"
@@ -53,10 +54,12 @@
     "nav": {
       "section_main": "Main",
       "section_account": "Account",
+      "section_creator": "Content",
       "overview": "Overview",
       "characters": "Characters",
       "my_games": "My Games",
       "participated": "Participating",
+      "systems": "Systems",
       "settings": "Settings",
       "no_role": "Player",
       "logout": "Log out",
@@ -171,6 +174,22 @@
       "detach": "Detach",
       "detach_first": "Detach current character first",
       "no_compatible_characters": "No compatible characters"
+    },
+    "systems_page": {
+      "search_placeholder": "Search by name...",
+      "create_btn": "Create system",
+      "empty": "No game systems found",
+      "no_description": "No description",
+      "inactive_badge": "Inactive",
+      "author_label": "Author",
+      "delete_confirm_title": "Delete system?",
+      "delete_confirm_desc": "System «{{name}}» will be deleted. This action is irreversible.",
+      "delete_confirm_ok": "System deleted",
+      "toggle_active_ok": "System status updated",
+      "create_ok": "System created",
+      "update_ok": "System updated",
+      "name_label": "Name",
+      "description_label": "Description"
     }
   },
   "errors": {

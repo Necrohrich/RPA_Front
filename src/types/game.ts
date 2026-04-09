@@ -72,4 +72,7 @@ export type GameSystem = {
     description: string | null
     version: string
     is_active: boolean
+    author_id: string | null
+    author_username: string | null
+    changelog: string | null
 }

@@ -4,7 +4,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '@/hooks/useAuth'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
-import { LayoutDashboard, Swords, Users, Settings, UserCircle, ChevronLeft, LogOut } from 'lucide-react'
+import {LayoutDashboard, Swords, Users, Settings, UserCircle, ChevronLeft, LogOut, ScrollText} from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useMatches } from 'react-router-dom'
 import type { RouteHandle } from '@/router/types'
@@ -18,6 +18,10 @@ const NAV_MAIN = [
     { to: '/dashboard/participated',labelKey: 'dashboard.nav.participated',  Icon: Users,           end: false },
 ] as const
 
+const NAV_CREATOR = [
+    { to: '/dashboard/systems', labelKey: 'dashboard.nav.systems', Icon: ScrollText, end: false },
+] as const
+
 const EXPANDED_W = 220
 const COLLAPSED_W = 56
 
@@ -27,6 +31,7 @@ export function DashboardLayout() {
     const [expanded, setExpanded] = useState(true)
 
     const initials = user?.login?.slice(0, 2).toUpperCase() ?? '??'
+    const isCreator = ['creator', 'moderator', 'superadmin'].includes(user?.platform_role ?? '')
     const matches = useMatches()
     const titleKey = matches
         .map(m => (m.handle as RouteHandle | undefined)?.titleKey)
@@ -88,6 +93,36 @@ export function DashboardLayout() {
                             )}
                         </NavLink>
                     ))}
+
+                    {isCreator && (
+                        <>
+                            {expanded && (
+                                <p className="px-4 pt-4 pb-1 text-[10px] uppercase tracking-widest text-muted-foreground">
+                                    {t('dashboard.nav.section_creator')}
+                                </p>
+                            )}
+                            {NAV_CREATOR.map(({ to, labelKey, Icon, end }) => (
+                                <NavLink
+                                    key={to}
+                                    to={to}
+                                    end={end}
+                                    className={({ isActive }) => cn(
+                                        'flex items-center gap-2.5 px-4 py-[7px] text-[13px] transition-colors border-l-[3px]',
+                                        isActive
+                                            ? 'border-brand bg-secondary text-foreground font-medium'
+                                            : 'border-transparent text-muted-foreground hover:text-foreground hover:bg-secondary/60'
+                                    )}
+                                >
+                                    {({ isActive }) => (
+                                        <>
+                                            <Icon size={14} className={cn('shrink-0 transition-colors', isActive ? 'text-brand' : '')} />
+                                            {expanded && <span className="whitespace-nowrap">{t(labelKey)}</span>}
+                                        </>
+                                    )}
+                                </NavLink>
+                            ))}
+                        </>
+                    )}
 
                     {expanded && (
                         <p className="px-4 pt-4 pb-1 text-[10px] uppercase tracking-widest text-muted-foreground">

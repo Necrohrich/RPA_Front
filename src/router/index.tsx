@@ -10,6 +10,7 @@ import {SettingsPage} from "@/pages/SettingsPage.tsx";
 import {CharactersPage} from "@/pages/CharactersPage.tsx";
 import {MyGamesPage} from "@/pages/MyGamesPage.tsx";
 import {ParticipatedGamesPage} from "@/pages/ParticipatedGamesPage.tsx";
+import {SystemsPage} from "@/pages/SystemsPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
                         handle: { titleKey: 'dashboard.nav.my_games' } },
                     { path: '/dashboard/participated', element: <ParticipatedGamesPage />,
                         handle: { titleKey: 'dashboard.nav.participated' } },
+                    { path: '/dashboard/systems', element: <SystemsPage />,
+                        handle: { titleKey: 'dashboard.nav.systems' } },
+                    { path: '/dashboard/systems/:id', element: <div />,
+                        handle: { titleKey: 'dashboard.nav.systems' } },
                     { path: '/dashboard/settings', element: <SettingsPage />,
                         handle: { titleKey: 'dashboard.nav.settings' } },
                 ],

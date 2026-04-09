@@ -6,7 +6,7 @@ export type AuthResponse = {
     token_type: string
 }
 
-export type PlatformRole = 'SUPERADMIN' | 'MODERATOR' | 'SUPPORT' | 'CREATOR'
+export type PlatformRole = 'superadmin' | 'moderator' | 'support' | 'creator'
 
 export type User = {
     id: string
