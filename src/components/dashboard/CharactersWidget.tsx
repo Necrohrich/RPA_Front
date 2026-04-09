@@ -4,9 +4,10 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import { useMyCharacters } from '@/hooks/useDashboard'
-import { pushLastCharacter } from '@/hooks/useLastVisited'
+import {getLastCharacters, pushLastCharacter} from '@/hooks/useLastVisited'
 import { CopyableId } from '@/components/ui/CopyableId'
 import { Plus, UserCircle } from 'lucide-react'
+import {useMemo} from "react";
 
 const CHAR_LIMIT = 5
 
@@ -83,7 +84,24 @@ export function CharactersWidget({ className }: { className?: string }) {
     const navigate = useNavigate()
     const { data, isLoading } = useMyCharacters()
 
-    const characters = data?.items.slice(0, CHAR_LIMIT) ?? []
+    const characters = useMemo(() => {
+        const items = data?.items ?? []
+        if (items.length === 0) return []
+
+        const lastVisited = getLastCharacters()
+
+        if (lastVisited.length === 0) return items.slice(0, CHAR_LIMIT)
+
+        const visitedIds = lastVisited.map(c => c.id)
+        const sorted = [
+            ...visitedIds
+                .map(id => items.find(c => c.id === id))
+                .filter(Boolean),
+            ...items.filter(c => !visitedIds.includes(c.id)),
+        ] as typeof items
+
+        return sorted.slice(0, CHAR_LIMIT)
+    }, [data?.items])
     const isEmpty = !isLoading && characters.length === 0
 
     const handleCharacterClick = (char: typeof characters[number]) => {

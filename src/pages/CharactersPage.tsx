@@ -20,6 +20,7 @@ import {
 import type { Character } from '@/types'
 import {useDebounce} from "@/hooks/useDebounce.ts";
 import {SystemSelect} from "@/components/ui/SystemSelect.tsx";
+import {pushLastCharacter} from "@/hooks/useLastVisited.ts";
 
 const PAGE_SIZE = 100
 
@@ -143,7 +144,15 @@ export function CharactersPage() {
                                 character={character}
                                 onEdit={setEditTarget}
                                 onDelete={setDeleteTarget}
-                                onClick={() => navigate(`/dashboard/characters/${character.id}`)}
+                                onClick={() => {
+                                    pushLastCharacter({
+                                        id: character.id,
+                                        name: character.name,
+                                        game_system_name: character.game_system_name ?? null,
+                                        avatar: character.avatar ?? null,
+                                    })
+                                    navigate(`/dashboard/characters/${character.id}`)
+                                }}
                             />
                         ))}
                     </div>

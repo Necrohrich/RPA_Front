@@ -68,20 +68,21 @@ export function SystemSelect({
         <Popover open={open} onOpenChange={(open: boolean) => !disabled && setOpen(open)}>
             {/* нативная кнопка вместо Button asChild */}
             <PopoverTrigger>
-                <button
-                    type="button"
-                    disabled={disabled}
+                <div
+                    role="combobox"
+                    aria-expanded={open}
+                    onClick={() => !disabled && setOpen(o => !o)}
                     className={cn(
-                        'flex h-9 w-full items-center justify-between rounded-md px-3 text-sm',
+                        'flex h-9 w-full items-center justify-between rounded-md px-3 text-sm cursor-pointer',
                         'bg-secondary border border-border transition-colors',
                         'hover:bg-secondary/80 focus:border-brand focus:outline-none',
                         !value && 'text-muted-foreground',
-                        disabled && 'opacity-60 cursor-not-allowed',
+                        disabled && 'opacity-60 cursor-not-allowed pointer-events-none',
                     )}
                 >
                     <span className="truncate">{displayValue}</span>
                     <ChevronsUpDown size={14} className="ml-2 shrink-0 text-muted-foreground" />
-                </button>
+                </div>
             </PopoverTrigger>
             <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
                 <Command>

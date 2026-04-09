@@ -8,6 +8,8 @@ import { DashboardLayout } from '@/components/layout';
 import { DashboardPage } from '@/pages/DashboardPage'
 import {SettingsPage} from "@/pages/SettingsPage.tsx";
 import {CharactersPage} from "@/pages/CharactersPage.tsx";
+import {MyGamesPage} from "@/pages/MyGamesPage.tsx";
+import {ParticipatedGamesPage} from "@/pages/ParticipatedGamesPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -33,9 +35,11 @@ export const router = createBrowserRouter([
                         handle: { titleKey: 'dashboard.nav.characters' } },
                     { path: '/dashboard/characters/:id', element: <div />,
                         handle: { titleKey: 'dashboard.nav.characters' } },
-                    { path: '/dashboard/games',        element: <div />,
+                    { path: '/dashboard/games', element: <MyGamesPage />,
                         handle: { titleKey: 'dashboard.nav.my_games' } },
-                    { path: '/dashboard/participated', element: <div />,
+                    { path: '/dashboard/games/:id', element: <div />,
+                        handle: { titleKey: 'dashboard.nav.my_games' } },
+                    { path: '/dashboard/participated', element: <ParticipatedGamesPage />,
                         handle: { titleKey: 'dashboard.nav.participated' } },
                     { path: '/dashboard/settings', element: <SettingsPage />,
                         handle: { titleKey: 'dashboard.nav.settings' } },

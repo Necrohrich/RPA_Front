@@ -7,7 +7,7 @@ import { FolderTabs, getCardRadiusClass } from '@/components/dashboard'
 import { useMyGames, useParticipatedGames, useLastSession } from '@/hooks/useDashboard'
 import { getLastGameId, setLastGameId } from '@/hooks/useLastVisited'
 import { CopyableId } from '@/components/ui/CopyableId'
-import { Plus, Gamepad2 } from 'lucide-react'
+import {Plus, Gamepad2, UserPlus} from 'lucide-react'
 import type { FolderTab } from '@/components/dashboard'
 import type { Game, GameSession } from '@/types'
 
@@ -101,9 +101,8 @@ function EmptyState() {
 
 // ── LastGameWidget ────────────────────────────────────────────────────────────
 
-export function LastGameWidget({ className, onCreateGame }: {
+export function LastGameWidget({ className}: {
     className?: string
-    onCreateGame?: () => void
 }) {
     const { t } = useTranslation()
     const navigate = useNavigate()
@@ -194,7 +193,7 @@ export function LastGameWidget({ className, onCreateGame }: {
 
                         {activeTab === 'mine' && (
                             <button
-                                onClick={onCreateGame}
+                                onClick={() => navigate('/dashboard/games?create=true')}
                                 className={cn(
                                     'flex items-center gap-1.5 px-3 py-1.5 rounded text-[12px] font-medium',
                                     'border border-border text-muted-foreground hover:text-foreground',
@@ -203,6 +202,20 @@ export function LastGameWidget({ className, onCreateGame }: {
                             >
                                 <Plus size={12} />
                                 {t('dashboard.last_game.create_game')}
+                            </button>
+                        )}
+
+                        {activeTab === 'participated' && (
+                            <button
+                                onClick={() => navigate('/dashboard/participated?join=true')}
+                                className={cn(
+                                    'flex items-center gap-1.5 px-3 py-1.5 rounded text-[12px] font-medium',
+                                    'border border-border text-muted-foreground hover:text-foreground',
+                                    'hover:bg-secondary transition-colors',
+                                )}
+                            >
+                                <UserPlus size={12} />
+                                {t('dashboard.last_game.join_game')}
                             </button>
                         )}
                     </div>

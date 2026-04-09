@@ -1,5 +1,5 @@
 // src/types/game.ts
-export type GameDiceMode = 'BALANCED' | 'LOYAL' | `UNFAIR` | `PURE`
+export type GameDiceMode = 'balanced' | 'loyal' | 'unfair' | 'pure'
 
 export type Game = {
     id: string
@@ -13,6 +13,12 @@ export type Game = {
     game_system_name: string | null
     dice_mode: GameDiceMode
     show_dice_mode: boolean
+    cover_url: string | null
+    description: string | null
+    sessions_count: number
+    players_count: number
+    rating_label: string | null   // 'terrible' | 'bad' | 'neutral' | 'good' | 'excellent'
+    rating_score: number | null   // 0.0–4.0
 }
 
 export type GameSession = {
