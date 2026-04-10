@@ -76,3 +76,43 @@ export type GameSystem = {
     author_username: string | null
     changelog: string | null
 }
+
+export type SchemaTab = 'sheet_schema' | 'rolls_schema' | 'rules_schema' | 'actions_schema'
+
+export type SchemasDto = {
+    version: string
+    changelog?: string | null
+    sheet_schema: Record<string, unknown>
+    rolls_schema: Record<string, unknown>
+    rules_schema: Record<string, unknown>
+    actions_schema: Record<string, unknown>
+}
+
+export type ValidationIssue = {
+    code: string
+    message: string
+    path?: string
+}
+
+export type SchemaStats = {
+    sections_count: number
+    fields_count: number
+    computed_fields: number
+    rolls_count: number
+    has_display_config: boolean
+}
+
+export type ValidationReport = {
+    valid: boolean
+    errors: ValidationIssue[]
+    warnings: ValidationIssue[]
+    stats: SchemaStats
+}
+
+// полная система со схемами — для редактора
+export type GameSystemFull = GameSystem & {
+    sheet_schema: Record<string, unknown>
+    rolls_schema: Record<string, unknown>
+    rules_schema: Record<string, unknown>
+    actions_schema: Record<string, unknown>
+}

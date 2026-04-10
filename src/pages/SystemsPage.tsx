@@ -87,7 +87,7 @@ export function SystemsPage() {
                 }
             />
 
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto scrollbar-hidden">
                 <SystemsGrid
                     systems={systems}
                     isLoading={isLoading}

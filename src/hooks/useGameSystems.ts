@@ -2,7 +2,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { apiClient } from '@/api/client'
 import { useAuth } from '@/hooks/useAuth'
-import type { GameSystem, Paginated } from '@/types'
+import type {GameSystem, GameSystemFull, Paginated, SchemasDto, ValidationReport} from '@/types'
 
 type UpdateSystemDto = {
     name?: string
@@ -34,12 +34,44 @@ const systemsApi = {
 
     remove: (id: string) =>
         apiClient.delete(`/admin/game-systems/${id}`).then(r => r.data),
+
+    getById: (id: string) =>
+        apiClient.get<GameSystemFull>(`/admin/game-systems/${id}`).then(r => r.data),
+
+    validateSchemas: (id: string, dto: SchemasDto) =>
+        apiClient.post<ValidationReport>(`/admin/game-systems/${id}/schemas/validate`, dto)
+            .then(r => r.data),
+
+    saveSchemas: (id: string, dto: SchemasDto) =>
+        apiClient.patch<ValidationReport>(`/admin/game-systems/${id}/schemas`, dto)
+            .then(r => r.data),
+
+    uploadZip: async (id: string, file: File) => {
+        const form = new FormData()
+        form.append('file', file)
+        const r = await apiClient.post<ValidationReport>(
+            `/admin/game-systems/${id}/upload`,
+            form,
+            {headers: {'Content-Type': 'multipart/form-data'}}
+        )
+        return r.data
+    },
+
+    exportZip: (id: string) =>
+        apiClient.get(`/admin/game-systems/${id}/export`, { responseType: 'blob' })
+            .then(r => r.data as Blob),
+
+    getSchemas: (id: string) =>
+        apiClient.get<SchemasDto>(`/admin/game-systems/${id}/schemas`)
+            .then(r => r.data),
 }
 
 export const systemKeys = {
     all: ['game-systems'] as const,
     list: () => ['game-systems', 'list'] as const,
     admin: (params: object) => ['game-systems', 'admin', params] as const,
+    detail: (id: string) => ['game-systems', 'detail', id] as const,
+    schemas: (id: string) => ['game-systems', 'schemas', id] as const,
 }
 
 // публичный список — переиспользуется в useCharacters, useGames
@@ -85,3 +117,50 @@ export const useDeleteGameSystem = () => {
         onSuccess: () => qc.invalidateQueries({ queryKey: systemKeys.all }),
     })
 }
+
+export const useGameSystemDetail = (id: string) =>
+    useQuery({
+        queryKey: systemKeys.detail(id),
+        queryFn: () => systemsApi.getById(id),
+        enabled: !!id,
+    })
+
+export const useValidateSchemas = () =>
+    useMutation({
+        mutationFn: ({ id, dto }: { id: string; dto: SchemasDto }) =>
+            systemsApi.validateSchemas(id, dto),
+    })
+
+export const useSaveSchemas = () => {
+    const qc = useQueryClient()
+    return useMutation({
+        mutationFn: ({ id, dto }: { id: string; dto: SchemasDto }) =>
+            systemsApi.saveSchemas(id, dto),
+        onSuccess: async (_, { id }) => {
+            // инвалидируем деталь системы чтобы version/changelog обновились
+            await qc.invalidateQueries({ queryKey: systemKeys.detail(id) })
+        },
+    })
+}
+
+export const useUploadZip = () => {
+    const qc = useQueryClient()
+    return useMutation({
+        mutationFn: ({ id, file }: { id: string; file: File }) =>
+            systemsApi.uploadZip(id, file),
+        onSuccess: async (_, { id }) => {
+            // после загрузки ZIP перезагружаем систему — схемы изменились
+            await qc.invalidateQueries({ queryKey: systemKeys.detail(id) })
+        },
+    })
+}
+
+// экспорт не мутация — триггерится вручную, не через хук
+export const exportZip = (id: string) => systemsApi.exportZip(id)
+
+export const useGameSystemSchemas = (id: string) =>
+    useQuery({
+        queryKey: systemKeys.schemas(id),
+        queryFn: () => systemsApi.getSchemas(id),
+        enabled: !!id,
+    })
