@@ -250,6 +250,41 @@
       "stat_rolls": "Rolls: {{count}}"
     }
   },
+  "character_page": {
+    "in_game": "Game",
+    "no_game": "Not in a game",
+    "version_mismatch": "Character schema version is outdated — some fields may not display correctly",
+    "edit": "Edit",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "copy": "Copy",
+    "progression": "Progression",
+    "creation": "Creation",
+    "actions": "Actions",
+    "saved": "Changes saved",
+    "copied": "Character copied",
+    "load_error": "Failed to load character",
+    "fields_count": "{{count}} fields",
+    "conditions": {
+      "title": "Conditions",
+      "empty": "No active conditions",
+      "toggle_on": "Apply",
+      "toggle_off": "Remove"
+    },
+    "activate":       "Activate",
+    "action_success": "Success! Result: {{total}}",
+    "action_fail":    "Failure. Result: {{total}}",
+    "action_rolled":  "Roll: {{total}}",
+    "action_applied": "Action applied",
+    "list": {
+      "empty":       "List is empty",
+      "add":         "Add item",
+      "confirm_add": "Add",
+      "equip":       "Equip",
+      "unequip":     "Unequip"
+    }
+  },
   "errors": {
     "default": "Something went wrong",
 

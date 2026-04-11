@@ -12,6 +12,7 @@ import {MyGamesPage} from "@/pages/MyGamesPage.tsx";
 import {ParticipatedGamesPage} from "@/pages/ParticipatedGamesPage.tsx";
 import {SystemsPage} from "@/pages/SystemsPage.tsx";
 import {SystemEditorPage} from "@/pages/SystemEditorPage.tsx";
+import {CharacterPage} from "@/pages/CharacterPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -35,7 +36,7 @@ export const router = createBrowserRouter([
                         handle: { titleKey: 'dashboard.nav.overview' } },
                     { path: '/dashboard/characters', element: <CharactersPage />,
                         handle: { titleKey: 'dashboard.nav.characters' } },
-                    { path: '/dashboard/characters/:id', element: <div />,
+                    { path: '/dashboard/characters/:id', element: <CharacterPage />,
                         handle: { titleKey: 'dashboard.nav.characters' } },
                     { path: '/dashboard/games', element: <MyGamesPage />,
                         handle: { titleKey: 'dashboard.nav.my_games' } },
