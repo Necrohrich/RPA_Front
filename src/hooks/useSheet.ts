@@ -56,6 +56,21 @@ const sheetApi = {
                 dice_mode: diceMode ?? null,
             })
             .then(r => r.data),
+
+    poolItems: (gameId: string, poolId: string) =>
+        apiClient
+            .get<CustomPoolItem[]>(`/games/${gameId}/custom/${poolId}`)
+            .then(r => r.data),
+
+    assignItem: (characterId: string, itemId: string) =>
+        apiClient
+            .post(`/characters/${characterId}/custom/${itemId}`)
+            .then(r => r.data),
+
+    unassignItem: (characterId: string, itemId: string) =>
+        apiClient
+            .delete(`/characters/${characterId}/custom/${itemId}`)
+            .then(r => r.data),
 }
 
 // ── Query keys ────────────────────────────────────────────────────────────────
@@ -66,6 +81,7 @@ export const sheetKeys = {
     schema:      (id: string) => ['character', id, 'schema'] as const,
     sheet:       (id: string) => ['character', id, 'sheet'] as const,
     customItems: (id: string) => ['character', id, 'custom'] as const,
+    poolItems: (gameId: string, poolId: string) => ['game', gameId, 'pool', poolId] as const,
 }
 
 // ── Hooks ─────────────────────────────────────────────────────────────────────
@@ -157,6 +173,37 @@ export const useApplyAction = (characterId: string) => {
             if (result.resource_spent || result.roll_result?.success) {
                 await queryClient.invalidateQueries({ queryKey: sheetKeys.sheet(characterId) })
             }
+        },
+    })
+}
+
+export const usePoolItems = (gameId: string, poolId: string, enabled = true) =>
+    useQuery({
+        queryKey: sheetKeys.poolItems(gameId, poolId),
+        queryFn:  () => sheetApi.poolItems(gameId, poolId),
+        enabled:  enabled && !!gameId && !!poolId,
+    })
+
+export const useAssignItem = (characterId: string) => {
+    const qc = useQueryClient()
+    return useMutation({
+        mutationFn: (itemId: string) => sheetApi.assignItem(characterId, itemId),
+        // инвалидируем assigned-список персонажа и конкретный пул
+        onSuccess: async () => {
+            await qc.invalidateQueries({ queryKey: sheetKeys.customItems(characterId) })
+            // пул инвалидируем через префикс — не знаем poolId здесь
+            await qc.invalidateQueries({ queryKey: ['game'] })
+        },
+    })
+}
+
+export const useUnassignItem = (characterId: string) => {
+    const qc = useQueryClient()
+    return useMutation({
+        mutationFn: (itemId: string) => sheetApi.unassignItem(characterId, itemId),
+        onSuccess: async () => {
+            await qc.invalidateQueries({ queryKey: sheetKeys.customItems(characterId) })
+            await qc.invalidateQueries({ queryKey: ['game'] })
         },
     })
 }

@@ -6,3 +6,4 @@ export { CharacterHero }  from './CharacterHero'
 export {ConditionsPanel} from "./ConditionsPanel.tsx";
 export {ActionsPanel} from "./ActionsPanel.tsx";
 export {SheetListField} from  "./SheetListField.tsx"
+export {CustomPoolsPanel} from  "./CustomPoolsPanel.tsx"

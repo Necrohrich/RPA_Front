@@ -114,10 +114,10 @@ export type Condition = {
 }
 
 export type CustomPool = {
-    id:               string
-    label:            string
+    id:                   string
+    label:                string | Record<string, string>
     gm_can_create_custom: boolean
-    fields:           ItemSchemaField[]
+    fields:               ItemSchemaField[]
 }
 
 export type RulesSchema = {

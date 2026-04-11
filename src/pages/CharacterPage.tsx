@@ -9,11 +9,11 @@ import {
     useCharacterSchema,
     useSheet,
     useUpdateSheet,
-    useCopyCharacter,
+    useCopyCharacter, useCustomPoolItems,
 } from '@/hooks/useSheet'
 import {
     ActionsPanel,
-    CharacterHero, ConditionsPanel,
+    CharacterHero, ConditionsPanel, CustomPoolsPanel,
     SheetAccordion,
 } from '@/components/sheet'
 import type { UpdateSheetPayload } from '@/types'
@@ -27,6 +27,7 @@ export function CharacterPage() {
     const characterQ = useCharacterDetail(id!)
     const sheetQ     = useSheet(id!)
     const schemaQ    = useCharacterSchema(id!, !!sheetQ.data)
+    const customItemsQ = useCustomPoolItems(id!)
     const activeConditionIds = (sheetQ.data?.raw['conditions'] as string[] | undefined) ?? []
 
     const updateSheet = useUpdateSheet(id!)
@@ -180,6 +181,19 @@ export function CharacterPage() {
                         characterId={id!}
                         actions={schemaQ.data.actions_schema.actions}
                         canAct={sheet.can_roll || sheet.is_gm}
+                    />
+                )}
+
+            {/* Кастомные поля */}
+            {character.game_id &&
+                schemaQ.data?.rules_schema?.custom_pools &&
+                schemaQ.data.rules_schema.custom_pools.length > 0 && (
+                    <CustomPoolsPanel
+                        pools={schemaQ.data.rules_schema.custom_pools}
+                        assignedItems={customItemsQ.data ?? []}
+                        characterId={id!}
+                        gameId={character.game_id}
+                        isGm={sheetQ.data?.is_gm ?? false}
                     />
                 )}
 
