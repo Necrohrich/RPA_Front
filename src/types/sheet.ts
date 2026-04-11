@@ -67,6 +67,7 @@ export type SheetResponse = {
     can_progress: boolean
     can_roll:    boolean
     is_gm:        boolean
+    version_mismatch: boolean
 }
 
 // ── Персонаж ──────────────────────────────────────────────────────────────────

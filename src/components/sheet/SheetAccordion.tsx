@@ -4,6 +4,7 @@ import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { SheetSection } from './SheetSection'
 import type { RenderedSection } from '@/types'
+import {useTranslation} from "react-i18next";
 
 type Props = {
     sections: RenderedSection[]
@@ -14,6 +15,7 @@ type Props = {
 }
 
 export function SheetAccordion({ sections, raw, editMode, onChange, onEquip }: Props) {
+    const { t } = useTranslation()
     // Инициализируем collapsed-состояние из display.collapsed каждой секции.
     // Ключ — id секции, значение — открыта ли (true = видна).
     const [open, setOpen] = useState<Record<string, boolean>>(() =>
@@ -66,7 +68,7 @@ export function SheetAccordion({ sections, raw, editMode, onChange, onEquip }: P
                                     {section.label}
                                 </span>
                                 <span className="text-[10px] text-muted-foreground/50 shrink-0">
-                                    {section.fields.length} полей
+                                    {t('character_page.fields_count', { count: section.fields.length })}
                                 </span>
                             </span>
 

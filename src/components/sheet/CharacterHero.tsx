@@ -35,7 +35,7 @@ export function CharacterHero({
 
     const canEdit      = sheet?.can_edit     ?? false
     const canProgress  = sheet?.can_progress ?? false
-    const versionMismatch = false // TODO: пробрасывать из сравнения schema_version
+    const versionMismatch = sheet?.version_mismatch ?? false
 
     return (
         <div className={cn(

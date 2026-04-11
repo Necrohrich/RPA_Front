@@ -88,9 +88,10 @@ export const useCharacterSchema = (id: string, enabled = true) =>
 
 export const useSheet = (id: string) => {
     const { i18n } = useTranslation()
+    const lang = i18n.language.split('-')[0]
     return useQuery({
-        queryKey: [...sheetKeys.sheet(id), i18n.language],
-        queryFn:  () => sheetApi.sheet(id, i18n.language),
+        queryKey: [...sheetKeys.sheet(id), lang],
+        queryFn:  () => sheetApi.sheet(id, lang),
         enabled:  !!id,
     })
 }
@@ -100,10 +101,9 @@ export const useUpdateSheet = (characterId: string) => {
     return useMutation({
         mutationFn: (payload: UpdateSheetPayload) =>
             sheetApi.updateSheet(characterId, payload),
-        onSuccess: (updatedSheet) => {
-            // сервер вернул свежий SheetResponseDTO — кладём прямо в кеш,
-            // не делая лишний GET
-            queryClient.setQueryData(sheetKeys.sheet(characterId), updatedSheet)
+        onSuccess: async () => {
+            // invalidate по базовому ключу — сбросит все языковые варианты
+            await queryClient.invalidateQueries({ queryKey: sheetKeys.sheet(characterId) })
         },
     })
 }
