@@ -68,6 +68,7 @@ export type SheetResponse = {
     can_roll:    boolean
     is_gm:        boolean
     version_mismatch: boolean
+    schema_version:   string | null
 }
 
 // ── Персонаж ──────────────────────────────────────────────────────────────────

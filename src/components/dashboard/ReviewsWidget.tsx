@@ -51,6 +51,18 @@ function ReviewCard({ review, gameName }: ReviewCardProps) {
                 </p>
             )}
 
+            {/* Автор (для вкладки "на мои игры") и лучший игрок */}
+            {review.author_username && (
+                <p className="text-[10px] text-muted-foreground truncate mb-0.5">
+                    ✍️ {review.author_username}
+                </p>
+            )}
+            {review.best_player_username && (
+                <p className="text-[10px] text-muted-foreground truncate mb-0.5">
+                    🏆 {review.best_player_username}
+                </p>
+            )}
+
             {review.rating
                 ? <RatingBar rating={review.rating} className="mt-1" />
                 : <span className="text-[10px] text-muted-foreground/50">{t('dashboard.reviews.no_rating')}</span>

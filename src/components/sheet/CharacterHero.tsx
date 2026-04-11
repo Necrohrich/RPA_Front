@@ -64,11 +64,19 @@ export function CharacterHero({
                     {character.name}
                 </h1>
 
-                {character.game_system_name && (
-                    <span className="text-sm text-brand/80 font-medium">
-                        {character.game_system_name}
-                    </span>
-                )}
+                {/* Система + версия */}
+                <div className="flex items-center gap-1.5">
+                    {character.game_system_name && (
+                        <span className="text-sm text-brand/80 font-medium">
+                            {character.game_system_name}
+                        </span>
+                    )}
+                    {sheet?.schema_version && (
+                        <span className="text-xs text-muted-foreground font-normal">
+                            v{sheet.schema_version}
+                        </span>
+                    )}
+                </div>
 
                 {character.game_name ? (
                     <span className="text-xs text-muted-foreground">

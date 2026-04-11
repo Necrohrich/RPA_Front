@@ -64,6 +64,8 @@ export type GameReview = {
     best_scenes: Record<string, string> | null
     best_npc: string[] | null
     best_player_id: string | null
+    author_username:      string | null
+    best_player_username: string | null
 }
 
 export type GameSystem = {
