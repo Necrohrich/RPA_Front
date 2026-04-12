@@ -29,6 +29,7 @@ export function CharacterPage() {
     const schemaQ    = useCharacterSchema(id!, !!sheetQ.data)
     const customItemsQ = useCustomPoolItems(id!)
     const activeConditionIds = (sheetQ.data?.raw['conditions'] as string[] | undefined) ?? []
+    const creationCompleted = Boolean(sheetQ.data?.raw['_creation_completed'])
 
     const updateSheet = useUpdateSheet(id!)
     const copyChar    = useCopyCharacter()
@@ -161,6 +162,7 @@ export function CharacterPage() {
                 onSave={handleSave}
                 onCancel={handleCancel}
                 onCopy={handleCopy}
+                creationCompleted={creationCompleted}
             />
 
 

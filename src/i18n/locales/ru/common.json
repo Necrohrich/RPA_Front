@@ -285,6 +285,34 @@
       "unequip":     "Снять"
     }
   },
+  "wizard": {
+    "creation_title":     "Создание персонажа",
+    "progression_title":  "Развитие персонажа",
+    "progression_locked": "Прокачка недоступна",
+    "progress":           "{{completed}} / {{total}} шагов",
+    "optional":           "необязательно",
+    "optional_step":      "Этот шаг необязателен",
+    "prev":               "Назад",
+    "next":               "Далее",
+    "apply":              "Применить",
+    "applying":           "Применяется...",
+    "finish":             "Завершить создание",
+    "finishing":          "Завершение...",
+    "no_options":         "Нет доступных опций",
+    "available_values":   "Доступные значения",
+    "required_field":     "Обязательное поле",
+    "optional_field":     "Необязательное поле",
+    "roll":               "Бросить",
+    "rolling":            "Бросаю...",
+    "accept_roll":        "Принять результат ({{value}})",
+    "compute_description":"Значение будет вычислено автоматически по формуле из схемы системы.",
+    "incomplete_hint":    "Осталось завершить обязательных шагов: {{count}}",
+    "back_to_char":       "Назад к персонажу",
+    "creation_complete":   "Персонаж создан!",
+    "progression_complete": "Уровень повышен!",
+    "reset": "Сбросить",
+    "revoke": "Отозвать распределение"
+  },
   "errors": {
     "default": "Что-то пошло не так",
 
@@ -347,6 +375,7 @@
   "common": {
     "loading": "Загрузка",
     "cancel": "Отмена",
-    "save": "Сохранить"
+    "save": "Сохранить",
+    "back": "Назад"
   }
 }

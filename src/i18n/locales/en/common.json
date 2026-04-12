@@ -285,6 +285,34 @@
       "unequip":     "Unequip"
     }
   },
+  "wizard": {
+    "creation_title":     "Character Creation",
+    "progression_title":  "Character Progression",
+    "progression_locked": "Progression is not available",
+    "progress":           "{{completed}} / {{total}} steps",
+    "optional":           "optional",
+    "optional_step":      "This step is optional",
+    "prev":               "Previous",
+    "next":               "Next",
+    "apply":              "Apply",
+    "applying":           "Applying...",
+    "finish":             "Finish Creation",
+    "finishing":          "Finishing...",
+    "no_options":         "No options available",
+    "available_values":   "Available values",
+    "required_field":     "Required field",
+    "optional_field":     "Optional field",
+    "roll":               "Roll",
+    "rolling":            "Rolling...",
+    "accept_roll":        "Accept result ({{value}})",
+    "compute_description":"The value will be calculated automatically using the system schema formula.",
+    "incomplete_hint":    "Required steps remaining: {{count}}",
+    "back_to_char":       "Back to character",
+    "creation_complete":   "Character created!",
+    "progression_complete": "Level up complete!",
+    "reset": "Reset",
+    "revoke": "Revoke allocation"
+  },
   "errors": {
     "default": "Something went wrong",
 
@@ -347,6 +375,7 @@
   "common": {
     "loading": "Loading",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "back": "Back"
   }
 }

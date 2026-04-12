@@ -13,6 +13,8 @@ import {ParticipatedGamesPage} from "@/pages/ParticipatedGamesPage.tsx";
 import {SystemsPage} from "@/pages/SystemsPage.tsx";
 import {SystemEditorPage} from "@/pages/SystemEditorPage.tsx";
 import {CharacterPage} from "@/pages/CharacterPage.tsx";
+import {CreationPage} from "@/pages/CreationPage.tsx";
+import {ProgressionPage} from "@/pages/ProgressionPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -51,6 +53,8 @@ export const router = createBrowserRouter([
                 ],
             },
             { path: '/dashboard/systems/:id', element: <SystemEditorPage /> },
+            { path: '/dashboard/characters/:id/creation',   element: <CreationPage /> },
+            { path: '/dashboard/characters/:id/progression', element: <ProgressionPage /> },
         ],
     },
 

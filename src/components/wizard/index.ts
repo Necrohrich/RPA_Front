@@ -1,0 +1,10 @@
+// src/components/wizard/index.ts
+export { WizardStepContent }    from './WizardStepContent'
+export { PickOptionStep }       from './steps/PickOptionStep'
+export { DistributePoolStep }   from './steps/DistributePoolStep'
+export { StandardArrayStep }    from './steps/StandardArrayStep'
+export { RollAndAssignStep }    from './steps/RollAndAssignStep'
+export { FreeTextStep }         from './steps/FreeTextStep'
+export { ComputeAndAssignStep } from './steps/ComputeAndAssignStep'
+export { ConfirmStep }          from './steps/ConfirmStep'
+export { WizardSkeleton } from './WizardSkeleton'

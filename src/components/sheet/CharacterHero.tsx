@@ -18,6 +18,7 @@ type Props = {
     onSave:      () => void
     onCancel:    () => void
     onCopy:      () => void
+    creationCompleted?: boolean
 }
 
 export function CharacterHero({
@@ -29,6 +30,7 @@ export function CharacterHero({
                                   onSave,
                                   onCancel,
                                   onCopy,
+                                  creationCompleted
                               }: Props) {
     const { t }    = useTranslation()
     const navigate = useNavigate()
@@ -125,11 +127,13 @@ export function CharacterHero({
                         )}
 
                         {/* Creation */}
-                        <HeroBtn
-                            icon={<ArrowRight size={13} />}
-                            label={t('character_page.creation')}
-                            onClick={() => navigate(`/dashboard/characters/${character.id}/creation`)}
-                        />
+                        {!creationCompleted && (
+                            <HeroBtn
+                                icon={<ArrowRight size={13} />}
+                                label={t('character_page.creation')}
+                                onClick={() => navigate(`/dashboard/characters/${character.id}/creation`)}
+                            />
+                        )}
 
                         {/* Copy */}
                         <HeroBtn
