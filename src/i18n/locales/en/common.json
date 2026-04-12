@@ -311,7 +311,9 @@
     "creation_complete":   "Character created!",
     "progression_complete": "Level up complete!",
     "reset": "Reset",
-    "revoke": "Revoke allocation"
+    "revoke": "Revoke allocation",
+    "roll_already_accepted": "Roll already accepted — you can reroll",
+    "roll_accepted":         "Accepted: {{value}}"
   },
   "errors": {
     "default": "Something went wrong",

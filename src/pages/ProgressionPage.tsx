@@ -6,9 +6,10 @@ import { toast } from 'sonner'
 import { useProgressionSteps, useApplyProgressionStep, useCanProgress } from '@/hooks/useWizard'
 import { WizardLayout } from '@/components/layout'
 import { WizardStepContent } from '@/components/wizard/WizardStepContent'
+import { WizardSkeleton } from '@/components/wizard'
+import { useSheet } from '@/hooks/useSheet'
+import { useWizardDraft } from '@/hooks/useWizardDraft'
 import type { StageInput } from '@/types'
-import {useWizardDraft} from "@/hooks/useWizardDraft.ts";
-import {WizardSkeleton} from "@/components/wizard";
 
 export function ProgressionPage() {
     const { id }   = useParams<{ id: string }>()
@@ -18,13 +19,15 @@ export function ProgressionPage() {
     const canProgressQ  = useCanProgress(id!)
     const stepsQ        = useProgressionSteps(id!)
     const applyMutation = useApplyProgressionStep(id!)
+    const sheetQ        = useSheet(id!)
+
+    // передаём raw в хук — он сам инициализирует localDraft числовыми полями
+    const { localDraft, updateDraft } = useWizardDraft(sheetQ.data?.raw)
 
     const steps      = stepsQ.data?.steps ?? []
     const isComplete = stepsQ.data?.is_complete ?? false
 
     const [activeStepId, setActiveStepId] = useState('')
-    const { localDraft, updateDraft } = useWizardDraft()
-
     const effectiveActiveId = activeStepId || steps[0]?.id || ''
     const activeStep = steps.find(s => s.id === effectiveActiveId)
 
@@ -47,7 +50,7 @@ export function ProgressionPage() {
         )
     }
 
-    if (stepsQ.isLoading || canProgressQ.isLoading) return <WizardSkeleton />
+    if (stepsQ.isLoading || canProgressQ.isLoading || sheetQ.isLoading) return <WizardSkeleton />
 
     return (
         <WizardLayout

@@ -44,7 +44,9 @@ export type RenderedField = {
     label:       string
     type:        FieldType
     value:       unknown
-    max_value?:  number | null
+    max_value?:  number | null   // для resource — максимум HP/маны
+    field_max?:  number | null   // ← добавить — max из схемы для integer/number
+    field_min?:  number | null
     options?:    string[]
     display?:    FieldDisplay
     readonly?:   boolean

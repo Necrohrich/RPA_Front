@@ -1,7 +1,6 @@
 // src/components/wizard/steps/RollAndAssignStep.tsx
-// Два этапа: 1) бросить кубик через /roll, 2) отправить результат как value шага
 import { useState } from 'react'
-import { Dices } from 'lucide-react'
+import { Dices, CheckCircle2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useTranslation } from 'react-i18next'
 import { useRoll } from '@/hooks/useSheet'
@@ -15,37 +14,53 @@ type Props = {
 }
 
 export function RollAndAssignStep({ step, characterId, isPending, onSubmit }: Props) {
-    const { t }  = useTranslation()
+    const { t }        = useTranslation()
     const rollMutation = useRoll(characterId)
 
     const [rollResult, setRollResult] = useState<number | null>(null)
+    const [accepted,   setAccepted]   = useState(false)
+
+    // текущее значение поля из localDraft (если шаг уже пройден в этой сессии)
+    // или просто показываем статус completed
+    const isCompleted = step.status === 'completed'
 
     const handleRoll = async () => {
         if (!step.roll) return
         const result = await rollMutation.mutateAsync({ rollId: step.roll })
         setRollResult(result.total)
+        setAccepted(false)
     }
 
-    const handleAccept = () => {
+    const handleAccept = async () => {
         if (rollResult === null) return
-        void onSubmit(step.id, { value: rollResult })
+        await onSubmit(step.id, { value: rollResult })
+        setAccepted(true)
     }
 
     const isRolling = rollMutation.isPending
 
     return (
         <div className="flex flex-col items-start gap-6">
+            {/* Статус завершённости */}
+            {isCompleted && !rollResult && (
+                <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg
+                                bg-brand/5 border border-brand/20 text-brand text-sm">
+                    <CheckCircle2 size={14} />
+                    {t('wizard.roll_already_accepted')}
+                </div>
+            )}
+
             {/* Бросок */}
             <div className="flex items-center gap-4">
                 <button
                     onClick={handleRoll}
-                    disabled={isRolling || isPending}
+                    disabled={isRolling || isPending || accepted}
                     className={cn(
                         'flex items-center gap-2 px-5 py-2.5 rounded-lg border-2',
                         'text-sm font-medium transition-all',
                         'border-brand/60 bg-brand/5 text-brand',
                         'hover:border-brand hover:bg-brand/10',
-                        (isRolling || isPending) && 'opacity-50 cursor-not-allowed',
+                        (isRolling || isPending || accepted) && 'opacity-50 cursor-not-allowed',
                     )}
                 >
                     <Dices size={16} />
@@ -57,15 +72,17 @@ export function RollAndAssignStep({ step, characterId, isPending, onSubmit }: Pr
                         <span className="text-3xl font-bold tabular-nums text-brand">
                             {rollResult}
                         </span>
-                        <span className="text-xs text-muted-foreground">
-                            {rollMutation.data?.breakdown}
-                        </span>
+                        {rollMutation.data?.breakdown && (
+                            <span className="text-xs text-muted-foreground">
+                                {rollMutation.data.breakdown}
+                            </span>
+                        )}
                     </div>
                 )}
             </div>
 
             {/* Принять результат */}
-            {rollResult !== null && (
+            {rollResult !== null && !accepted && (
                 <button
                     onClick={handleAccept}
                     disabled={isPending}
@@ -77,6 +94,15 @@ export function RollAndAssignStep({ step, characterId, isPending, onSubmit }: Pr
                 >
                     {t('wizard.accept_roll', { value: rollResult })}
                 </button>
+            )}
+
+            {/* Результат принят */}
+            {accepted && (
+                <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg
+                                bg-brand/5 border border-brand/20 text-brand text-sm">
+                    <CheckCircle2 size={14} />
+                    {t('wizard.roll_accepted', { value: rollResult })}
+                </div>
             )}
         </div>
     )

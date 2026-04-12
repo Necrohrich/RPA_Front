@@ -75,7 +75,14 @@ export function WizardStepContent({
                             localDraft={localDraft}
                         />
                     )}
-                    {step.type === 'roll_and_assign'    && <RollAndAssignStep    {...stepProps} characterId={characterId} />}
+                    {step.type === 'roll_and_assign' && (
+                        <RollAndAssignStep
+                            step={step}
+                            characterId={characterId}
+                            isPending={isPending}
+                            onSubmit={onSubmit}
+                        />
+                    )}
                     {step.type === 'free_text'          && <FreeTextStep         {...stepProps} />}
                     {step.type === 'compute_and_assign' && <ComputeAndAssignStep {...stepProps} />}
                     {step.type === 'confirm'            && (

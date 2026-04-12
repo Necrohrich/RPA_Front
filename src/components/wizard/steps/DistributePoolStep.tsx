@@ -27,10 +27,14 @@ export function DistributePoolStep({ step, characterId: _characterId, isPending,
     const remaining   = budget - totalSpent
 
     const change = (field: string, delta: number) => {
-        const current = allocations[field] ?? 0
-        const next    = current + delta
+        const current   = allocations[field] ?? 0
+        const next      = current + delta
+        const fieldMax  = step.pool_field_limits?.[field] ?? null
+        const baseValue = localDraft[field] ?? 0
+
         if (next < 0) return
         if (delta > 0 && remaining <= 0) return
+        if (delta > 0 && fieldMax != null && baseValue + next > fieldMax) return
         setAllocations(prev => ({ ...prev, [field]: next }))
     }
 

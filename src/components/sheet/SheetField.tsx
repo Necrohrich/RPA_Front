@@ -3,6 +3,12 @@ import { cn } from '@/lib/utils'
 import type { RenderedField } from '@/types'
 import {SheetListField} from "@/components/sheet/SheetListField.tsx";
 
+const inputCn = cn(
+    'bg-secondary border border-border rounded px-2 py-1',
+    'text-sm text-foreground focus:outline-none focus:border-brand',
+    'w-full',
+)
+
 // Расширяем тип внутри файла — _proficient пробрасывается из SheetSection для skill
 type FieldWithMeta = RenderedField & { _proficient?: boolean }
 
@@ -167,6 +173,7 @@ function FieldControl({ field, isEdit, equipped, onChange, onEquip }: ControlPro
             value={value as string | number}
             isEdit={isEdit}
             onChange={onChange}
+            field={field}
         />
     )
 }
@@ -223,44 +230,86 @@ function ResourceField({ id, value, maxValue, isEdit, onChange }: {
     )
 }
 
-function NumberOrTextField({ id, type, value, isEdit, onChange }: {
-    id: string
-    type: 'integer' | 'number' | 'text'
-    value: string | number
-    isEdit: boolean
+function NumberOrTextField({ id, type, value, isEdit, onChange, field }: {
+    id:       string
+    type:     'integer' | 'number' | 'text'
+    value:    string | number
+    isEdit:   boolean
     onChange: (id: string, v: unknown) => void
+    field:    RenderedField
 }) {
-    const isNumeric = type === 'integer' || type === 'number'
-
     if (!isEdit) {
+        return <span className="text-sm text-foreground">{value ?? '—'}</span>
+    }
+
+    if (type === 'text') {
         return (
-            <span className="text-sm text-foreground">
-                {value != null && value !== '' ? String(value) : '—'}
-            </span>
+            <input
+                type="text"
+                value={String(value ?? '')}
+                onChange={e => onChange(id, e.target.value)}
+                className={inputCn}
+            />
         )
     }
 
+    // для integer и number — кастомный stepper вместо браузерного
+    const numVal  = Number(value) || 0
+    const fieldMin = field.field_min ?? null
+    const fieldMax = field.field_max ?? null
+    console.log('field limits:', field.id, { fieldMin, fieldMax, numVal })
+
+    const step = (delta: number) => {
+        const next = type === 'integer' ? numVal + delta : numVal + delta * 0.1
+        if (fieldMin != null && next < fieldMin) return
+        if (fieldMax != null && next > fieldMax) return
+        onChange(id, type === 'integer' ? Math.round(next) : next)
+    }
+
     return (
-        <div className={cn('flex items-center gap-1', isNumeric && 'w-fit')}>
-            {isNumeric && (
-                <StepBtn onClick={() => onChange(id, Number(value ?? 0) - 1)} label="-" />
-            )}
-            <input
-                type={isNumeric ? 'number' : 'text'}
-                value={value ?? ''}
-                onChange={e => onChange(
-                    id,
-                    isNumeric ? Number(e.target.value) : e.target.value,
-                )}
+        <div className="flex items-center gap-1">
+            <button
+                onClick={() => step(-1)}
+                disabled={fieldMin != null && numVal <= fieldMin}
                 className={cn(
-                    'bg-secondary border border-border rounded px-2 py-1',
+                    'w-6 h-6 rounded flex items-center justify-center text-xs font-bold shrink-0',
+                    'bg-secondary border border-border text-muted-foreground',
+                    'hover:border-brand/50 hover:text-foreground transition-colors',
+                    'disabled:opacity-30 disabled:cursor-not-allowed',
+                )}
+            >−</button>
+
+            <input
+                type="number"
+                value={numVal}
+                onChange={e => {
+                    const raw = type === 'integer'
+                        ? parseInt(e.target.value, 10)
+                        : parseFloat(e.target.value)
+                    if (isNaN(raw)) return
+                    if (fieldMin != null && raw < fieldMin) return
+                    if (fieldMax != null && raw > fieldMax) return
+                    onChange(id, raw)
+                }}
+                className={cn(
+                    'w-14 text-center bg-secondary border border-border rounded px-1 py-0.5',
                     'text-sm text-foreground focus:outline-none focus:border-brand',
-                    isNumeric ? 'w-20 text-center' : 'w-full',
+                    // скрываем браузерные стрелки
+                    '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none',
+                    '[&::-webkit-inner-spin-button]:appearance-none',
                 )}
             />
-            {isNumeric && (
-                <StepBtn onClick={() => onChange(id, Number(value ?? 0) + 1)} label="+" />
-            )}
+
+            <button
+                onClick={() => step(+1)}
+                disabled={fieldMax != null && numVal >= fieldMax}
+                className={cn(
+                    'w-6 h-6 rounded flex items-center justify-center text-xs font-bold shrink-0',
+                    'bg-secondary border border-border text-muted-foreground',
+                    'hover:border-brand/50 hover:text-foreground transition-colors',
+                    'disabled:opacity-30 disabled:cursor-not-allowed',
+                )}
+            >+</button>
         </div>
     )
 }

@@ -311,7 +311,9 @@
     "creation_complete":   "Персонаж создан!",
     "progression_complete": "Уровень повышен!",
     "reset": "Сбросить",
-    "revoke": "Отозвать распределение"
+    "revoke": "Отозвать распределение",
+    "roll_already_accepted": "Бросок уже принят — можно перебросить",
+    "roll_accepted":         "Принято: {{value}}"
   },
   "errors": {
     "default": "Что-то пошло не так",

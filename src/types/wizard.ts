@@ -36,6 +36,7 @@ export type WizardStep = {
 
     // roll_and_assign / compute_and_assign
     roll: string | null
+    pool_field_limits?: Record<string, number | null>
 }
 
 // ── Ответ GET .../creation-steps / .../progression-steps ─────────────────────

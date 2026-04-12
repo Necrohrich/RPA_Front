@@ -31,7 +31,7 @@ const wizardApi = {
 
     applyProgressionStep: (characterId: string, stepId: string, payload: StageInput) =>
         apiClient
-            .post<WizardStatus>(`/characters/${characterId}/progression/${stepId}`, payload)
+            .post<WizardStatus>(`/characters/${characterId}/progression-steps/${stepId}`, payload)
             .then(r => r.data),
 }
 
@@ -80,6 +80,8 @@ export const useCanProgress = (characterId: string) =>
         queryKey: wizardKeys.canProgress(characterId),
         queryFn:  () => wizardApi.canProgress(characterId),
         enabled:  !!characterId,
+        refetchInterval: 10_000,       // опрашивает каждые 10 секунд
+        refetchOnWindowFocus: true,    // рефетч при возврате в окно
     })
 
 export const useProgressionSteps = (characterId: string) => {
@@ -97,15 +99,15 @@ export const useApplyProgressionStep = (characterId: string) => {
     return useMutation({
         mutationFn: ({ stepId, payload }: { stepId: string; payload: StageInput }) =>
             wizardApi.applyProgressionStep(characterId, stepId, payload),
-        onSuccess: async (updatedStatus) => {
+        onSuccess: async (updatedStatus, variables) => {
+            // variables содержит {stepId, payload} — то что передали в mutate
             qc.setQueriesData(
                 { queryKey: wizardKeys.progression(characterId) },
                 updatedStatus,
             )
-            if (updatedStatus.is_complete) {
-                // confirm прокачки инкрементирует level и обновляет sheet_data
+            if (variables.stepId === 'confirm') {
+                // confirm прокачки — инвалидируем анкету и сбрасываем can-progress
                 await qc.invalidateQueries({ queryKey: ['character', characterId] })
-                // can-progress сбрасывается — GM должен снова выдать уровень
                 await qc.invalidateQueries({ queryKey: wizardKeys.canProgress(characterId) })
             }
         },
